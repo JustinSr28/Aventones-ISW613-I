@@ -13,7 +13,7 @@ $user = new Users();
         $_POST['password'],
         $_POST['address'],
         $_POST['phone-number'],
-        "0",
+        "Admin",
         $_FILES['user-photo']
     );
 

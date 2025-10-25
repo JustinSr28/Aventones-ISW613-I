@@ -1,12 +1,12 @@
 ﻿<?php
-require_once "../common/conectionBD.php";
+require_once "conectionBD.php";
 
 class Users {
     private $conexion;
     private $uploadDir = "../images/users/";    
     private $picturePath;
     private $token = "x";        
-    private $state = "activo";   
+    private $state = "active";   
 
     public function __construct() {
         $db = new ConnectionBD(); 
@@ -26,7 +26,7 @@ class Users {
 
             // Verifica la contraseña
             if (password_verify($password, $user['password'])) {
-                return $user; //Login exitoso
+                return $user; // Login exitoso
             } else {
                 return "Wrong Password"; //Contraseña incorrecta
             }
@@ -59,8 +59,7 @@ class Users {
             return "Error: " . $sql . "<br>" . $this->conexion->error;
         }
 
-        // Cerrar conexión
-        $this->conexion->close();
+      
     }
 
     // Subida de imagen
@@ -95,7 +94,6 @@ class Users {
         }
         return $users;
     }
-
 }
 ?>
 

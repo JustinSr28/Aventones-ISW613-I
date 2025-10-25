@@ -37,26 +37,52 @@
             </div>
         </div>
     </header>
- <main>
+    <main>
         <h1>All Users</h1>
 
         <div class="button-cont">
             <a id="newRideBtn" class="button" href="newRide.html">New User</a>
         </div>
-
         <table>
             <thead>
                 <tr>
                     <th class="hidden">id</th>
                     <th>ID</th>
                     <th>Full name</th>
+                    <th>Photo</th>
                     <th>Role</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody id="ride_list">
+                <?php
+                require_once "../common/Users.php";
+                
+                $usuario = new Users();
+                $users = $usuario->loadUsers();
+                foreach ($users as $user) {
+                echo "
+                <tr>
+                    ";
+                    echo "
+                    <td class='hidden'>{$user['idUser']}</td>";
+                    echo "
+                    <td>{$user['ID']}</td>";
+                    echo "
+                    <td>{$user['name']} {$user['lastName']}</td>";
+                    echo "
+                    <td>{$user['role']}</td>"; //cambiar a role y eliminar tabla de roles
+                    echo "
+                    <td>{$user['status']}</td>";
+                    echo "
+                </tr>";
+                }
+                ?>
             </tbody>
         </table>
+
+
+
     </main>
 
     <footer>

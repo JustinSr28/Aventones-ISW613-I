@@ -6,7 +6,7 @@ class Users {
     private $uploadDir = "../images/users/";    
     private $picturePath;
     private $token = "x";        
-    private $state = "activo";   
+    private $status = "activo";   
 
     public function __construct() {
         $db = new ConnectionBD(); 
@@ -22,8 +22,8 @@ class Users {
         $encryptedPass = password_hash($password, PASSWORD_BCRYPT); // Encriptar contraseña
 
         // Sentencia SQL
-        $sql = "INSERT INTO users (ID, name, lastName, gmail, phoneNumber, picture, password, idRole, token, state)
-                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', $role, '$this->token', '$this->state')";
+        $sql = "INSERT INTO users (ID, name, lastName, gmail, phoneNumber, picture, password, role, token, status)
+                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$this->token', '$this->status')";
 
         // Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {
@@ -55,6 +55,19 @@ class Users {
         }
 
         return "images/users/default.jpg";
+    }
+
+    // Método para cargar todos los usuarios
+    public function loadUsers() {
+        $sql = "SELECT * from users";
+        $result = $this->conexion->query($sql);
+        $users = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $users[] = $row;
+            }
+        }
+        return $users;
     }
 }
 ?>
