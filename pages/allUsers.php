@@ -49,7 +49,6 @@
                     <th class="hidden">id</th>
                     <th>ID</th>
                     <th>Full name</th>
-                    <th>Photo</th>
                     <th>Role</th>
                     <th>Status</th>
                 </tr>
@@ -57,32 +56,27 @@
             <tbody id="ride_list">
                 <?php
                 require_once "../common/Users.php";
-                
                 $usuario = new Users();
                 $users = $usuario->loadUsers();
-                foreach ($users as $user) {
-                echo "
-                <tr>
-                    ";
-                    echo "
-                    <td class='hidden'>{$user['idUser']}</td>";
-                    echo "
-                    <td>{$user['ID']}</td>";
-                    echo "
-                    <td>{$user['name']} {$user['lastName']}</td>";
-                    echo "
-                    <td>{$user['role']}</td>"; //cambiar a role y eliminar tabla de roles
-                    echo "
-                    <td>{$user['status']}</td>";
-                    echo "
-                </tr>";
-                }
                 ?>
+                <?php foreach ($users as $user): ?>
+                <tr>
+                    <td class="hidden"><?= htmlspecialchars($user['idUser']) ?></td> 
+                    <td><?= htmlspecialchars($user['ID']) ?></td>
+                    <td><?= htmlspecialchars($user['name'] . ' ' . $user['lastName']) ?></td>
+                    <td><?= htmlspecialchars($user['role']) ?></td>
+                    <td>
+                        <input 
+                            type="checkbox"
+                            class="status-toggle"
+                            data-id="<?= htmlspecialchars($user['idUser']) ?>"
+                            <?= $user['status'] === 'active' ? 'checked' : '' ?>>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+                
             </tbody>
         </table>
-
-
-
     </main>
 
     <footer>
@@ -98,7 +92,6 @@
         <p>&copy; 2025 Aventones.com</p>
 
     </footer>
-
+    <script src="../JavaScript/updateStatusCheckBox.js"></script>
 </body>
-
 </html>

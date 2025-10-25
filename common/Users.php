@@ -6,7 +6,7 @@ class Users {
     private $uploadDir = "../images/users/";    
     private $picturePath;
     private $token = "x";        
-    private $status = "activo";   
+    private $status = "active";   
 
     public function __construct() {
         $db = new ConnectionBD(); 
