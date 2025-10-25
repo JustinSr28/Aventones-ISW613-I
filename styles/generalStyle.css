@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+:root {
+    --fuente-registro: Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+}
+body{
+    background-color: #f7f8fb;
+    font-family: var(--fuente-registro);
+}
+
+
+nav.Head {
+    height: 2rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    
+}
+
+.Head a.activo {
+    background-color: #4f46e5;
+    color: white;
+    border-radius: 5px;
+}
+
+.Head ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.Head li {
+    margin-right: 15px;
+}
+
+.Head a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-family: var(--fuente-registro);
+}
+nav.Head:hover {
+    background-color: #c6c6c6;
+}
+
+header>img[src="../images/logo.png"] {
+    display: flex;
+}
+
+.design-logo {
+    width: 400px;
+    height: auto;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+.menu-cont {
+    display: flex;
+    background-color: #ececec;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0% 3%;
+    border-radius: 10px;
+}
+
+div.navigation-cont {
+    margin-right: 1px;
+    display: flex;
+    padding: 5px;
+}
+
+.navigation-design {
+    font-size: 20px;
+    font-family: var(--fuente-registro);
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+.navigation-image {
+    width: 24%;
+    margin-left: 50px;
+}
+
+.user-menu:hover .menu-hover {
+    display: grid;
+}
+
+#activo {
+    background-color: #dddddd;
+}
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-hover {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.menu-hover ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-hover ul li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.menu-hover ul li a:hover {
+    background-color: #f0f0f0;
+}
+
+.user-menu:hover .menu-hover {
+    display: block;
+}
+
+footer>p {
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--fuente-registro);
+    font-size: 100%;
+    color: #616161;
+}
+
+footer nav,
+a.foot {
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--fuente-registro);
+    font-size: 100%;
+    color: #616161;
+    margin-bottom: 15px;
+}
+
+

@@ -1,0 +1,134 @@
+:root {
+    --fuente-registro: Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #000000;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    margin-top: 6rem;
+    text-align: center;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 53rem;
+    height: 0.9px;
+    background-color: #e5e7eb;
+    margin-top: 10px;
+}
+
+
+form>p {
+    font-size: 20px;
+    color: #6b7280;
+}
+
+.formRider {
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.bigElement {
+    grid-column: 1 / -1;
+}
+
+.bigElement#buttonId {
+    grid-column: 1/-1;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.formRider>div {
+    padding: 10px;
+}
+
+.formRider>div>label {
+    font-family: var(--fuente-registro);
+    font-size: 20px;
+    color: #6b7280;
+
+}
+
+.formRider>div>input {
+    font-family: var(--fuente-registro);
+    font-size: 20px;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 2%;
+}
+
+.formRider>div>input[type="file"] {
+    font-size: 15px;
+}
+
+select {
+    font-family: var(--fuente-registro);
+    font-size: 20px;
+    padding: 10px;
+    width: 100%;
+}
+
+p.left,
+a {
+    font-family: var(--fuente-registro);
+    font-size: 20px;
+    text-align: right;
+}
+
+p.right,
+a {
+    font-family: var(--fuente-registro);
+    font-size: 20px;
+    text-align: left;
+}
+
+a.buttonClass {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #4338ca;
+    color: white;
+    font-family: var(--fuente-registro);
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+
+
+hr {
+    background-color: #ccc;
+    margin-bottom: 20px;
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: right;
+    margin-left: 20rem;
+}
+
+button {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 5px 15px;
+    background-color: #4338ca;
+    color: white;
+    font-family: var(--fuente-registro);
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid #4338ca;
+}
