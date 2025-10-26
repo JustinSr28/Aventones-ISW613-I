@@ -1,12 +1,11 @@
-﻿<?php
+<?php
 require_once "../common/conectionBD.php";
 
 class Users {
     private $conexion;
     private $uploadDir = "../images/users/";    
     private $picturePath;
-    private $token = "x";        
-    private $status = "active";   
+   
 
     public function __construct() {
         $db = new ConnectionBD(); 
@@ -14,14 +13,14 @@ class Users {
     }
 
     // Método para insertar usuario
-    public function insertUser($name, $lastName, $ID, $birthDate, $gmail, $password, $address, $phoneNumber, $role, $file) {
+    public function insertUser($name, $lastName, $ID, $birthDate, $gmail, $password, $address, $phoneNumber, $role, $file,$token) {
         
         $this->picturePath = $this->uploadImage($file);
         $encryptedPass = password_hash($password, PASSWORD_BCRYPT); // Encriptar contraseña
 
         // Sentencia SQL
         $sql = "INSERT INTO users (ID, name, lastName, gmail, phoneNumber, picture, password, role, token, status)
-                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$this->token', '$this->status')";
+                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$token', 'inactive')";
 
         // Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {
@@ -72,6 +71,18 @@ class Users {
         $sql = "UPDATE users SET status = '$status' WHERE idUser = $id";  
         mysqli_query($this -> conexion, $sql);
     }
+
+    public function activateUser($token){
+        $sql = "UPDATE users SET status= 'active' WHERE token = '$token'";
+        mysqli_query($this -> conexion, $sql);
+
+    }
+
+    public function getLoginData($email){
+        $sql = "SELECT * FROM users WHERE gmail = '$email'";
+        return mysqli_query($this->conexion, $sql);
+    }
+
 }
 ?>
 
