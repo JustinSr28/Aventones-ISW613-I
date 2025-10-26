@@ -14,6 +14,7 @@ class Rides {
                 VALUES ($idUser, '$origin', '$destination', '$departureTime', '$rideDate', $costPerSeat, $availableSeats, '$status')";
 		// Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {
+			header("Location: ../pages/myRides.html");)
             return true;
         } else {
             return "Error: " . $sql . "<br>" . $this->conexion->error;

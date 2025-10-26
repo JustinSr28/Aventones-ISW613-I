@@ -39,7 +39,7 @@
 
     <main>
         <h1>New Ride</h1>
-        <form class="formm" id="new_ride_form">
+        <form class="formm" id="new_ride_form" action= "../actions/insertRide.php" method="POST">
              <div class="input-design-right">
                 <label for="departure-from">Departure from <br></label>
                 <input type="text" id="departure-from" name="departure-from" class="input-desing" >
@@ -66,10 +66,8 @@
 
                 <div>
                     <label for="time">Time <br></label>
-                    <select id="time" name="time">
-                        <option value="10:00">10:00 am</option>
-                        <option value="11:00">11:00 am</option>
-                    </select>
+                    <input type="text" id="time" name="time">
+                      
                 </div>
 
                 <div>
@@ -78,7 +76,7 @@
                 </div>
 
                 <div>
-                    <label for="fee">Fee <br></label>
+                    <label for="fee">Fee per Seat <br></label>
                     <input type="number" min="1" max="100" step="1" value="1" id="fee" name="fee">
                 </div>
 
@@ -89,6 +87,7 @@
             require_once "../common/Vehicles.php";
             session_start();
             $idUser = $_SESSION['idUser']; // Obtener el idUser de la sesión
+            
             $vehicleObj = new Vehicles();
             $vehicles = $vehicleObj->loadVehicles($idUser);
             ?>
@@ -96,7 +95,7 @@
 
                 <div class="vehicle-details">
                     <div>
-                        <label for="plate">Plate <br></label>
+                        <label for="plate">Plate & Brand<br></label>
                         <select id="plate" name="plate">
                         <option value="<?= htmlspecialchars($vehicle['plateNumber']) ?>"><?= htmlspecialchars($vehicle['plateNumber']) . ' ' . htmlspecialchars($vehicle['brand'])?></option>
 
