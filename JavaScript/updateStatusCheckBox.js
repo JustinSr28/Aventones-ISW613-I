@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         checkbox.addEventListener("change", function () {
             const userId = this.getAttribute("data-id");
             const newState = this.checked ? "active" : "inactive";
-            const previous = !this.checked; 
+             
 
            
             fetch("../actions/updateStatus.php", {
