@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Vehicles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/generalStyle.css">
+    <link rel="stylesheet" href="../styles/myRides.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <img src="../images/logo.png" class="design-logo" alt="Aventones Logo">
+
+        <div class="menu-cont">
+            <nav class="Head" aria-label="Main menu">
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
+                    <li><a href="">Bookings</a></li>
+                </ul>
+            </nav>
+
+            <div class="navigation-cont">
+                <div class="user-menu">
+                    <img src="images/user.png" class="navigation-image" alt="User icon">
+                    <nav class="menu-hover">
+                        <ul>
+                            <li><a href="" id="logout-link">Logout</a></li>
+                            <li><a href="">Profile</a></li>
+                            <li><a href="" class="activo">Configuration</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>My Vehicles</h1>
+
+        <div class="button-cont">
+            <a id="newVehicleBtn" class="button" href="newVehicle.html">Add New Vehicle</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Plate</th>
+                    <th>Color</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Seats</th>
+                    <th id="picture"></th>
+                    <th id="actionTable">Actions</th>
+
+                </tr>
+            </thead>
+            <tbody id="vehicle_list">
+                <?php 
+                require_once "../common/Vehicles.php";
+                session_start();
+                $idUser = $_SESSION['idUser'];
+                $vehicleObj = new Vehicles();
+                $vehicles = $vehicleObj->loadVehicles($idUser);
+                ?>
+
+                <?php foreach ($vehicles as $vehicle): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($vehicle['plateNumber']) ?></td>
+                        <td><?= htmlspecialchars($vehicle['color']) ?></td>
+                        <td><?= htmlspecialchars($vehicle['brand']) ?></td>
+                        <td><?= htmlspecialchars($vehicle['model']) ?></td>
+                        <td><?= htmlspecialchars($vehicle['year']) ?></td>
+                        <td><?= htmlspecialchars($vehicle['seatCapacity']) ?></td>
+                        <td><img src="../<?= htmlspecialchars($vehicle['picture']) ?>" alt="Vehicle Image" width="100"></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <hr>
+        <nav aria-label="Footer navigation">
+            <a href="" class="foot">Home</a> |
+            <a href="" class="foot">Rides</a> |
+            <a href="" class="foot">Bookings</a> |
+            <a href="" class="foot">Settings</a> |
+            <a href="" class="foot">Login</a> |
+            <a href="" class="foot">Register</a>
+        </nav>
+        <p>&copy; 2025 Aventones.com</p>
+
+    </footer>
+
+</body>
+
+</html>
