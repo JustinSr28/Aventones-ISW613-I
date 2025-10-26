@@ -130,7 +130,7 @@ p.right,a {
     text-align: left;
 }
 
-a.buttonClass {
+.buttonClass {
   display: inline-block;
   margin: 0 auto;
   padding: 10px 20px;
@@ -140,6 +140,7 @@ a.buttonClass {
   font-size: 20px;
   text-decoration: none;
   border-radius: 8px;
+  border:1px solid #4338ca;
 }
 
 
