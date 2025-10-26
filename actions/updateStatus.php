@@ -1,5 +1,6 @@
 <?php
 require_once "../common/conectionBD.php";
+require_once "../common/Users.php";
 
 $id     = $_POST['id'];
 $status = $_POST['state'];
@@ -7,8 +8,7 @@ $status = $_POST['state'];
 $db = new ConnectionBD();
 $conn = $db->getConnection();
 
-
-$sql = "UPDATE users SET status = '$status' WHERE idUser = $id";  
-$conn->query($sql);
-$conn->close();
+$users = new Users();
+$users -> updateStatus($status,$id);
+?>
 
