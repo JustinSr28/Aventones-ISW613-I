@@ -69,6 +69,11 @@ class Users {
         }
         return $users;
     }
+
+    public function updateStatus($status,$id){
+        $sql = "UPDATE users SET status = '$status' WHERE idUser = $id";  
+        mysqli_query($this -> conexion, $sql);
+    }
 }
 ?>
 
