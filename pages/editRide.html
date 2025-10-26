@@ -24,7 +24,7 @@
 
             <div class="navigation-cont">
                 <div class="user-menu">
-                    <img src="images/user.png" class="navigation-image" alt="User icon">
+                    <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
                             <li><a href="" id="logout-link">Logout</a></li>
