@@ -44,7 +44,7 @@
         <h1>New Vehicle</h1>
         <hr>
 
-        <form class="formNewVehicle" method="POST" action="/vehicles/store" enctype="multipart/form-data">
+        <form class="formNewVehicle" method="POST" action="../actions/insertVehicle.php" enctype="multipart/form-data">
 
             <label for="plate">Plate<span class="req">*</span></label>
             <input class="input-design" id="plate" type="text" name="plate" placeholder="Enter your plate" required>
@@ -70,6 +70,9 @@
 
             <label for="model">Model<span class="req">*</span></label>
             <input id="model" type="text" name="model" placeholder="Enter the Vehicle model" required>
+
+            <label for="year">Year<span class="req">*</span></label>
+            <input id="year" type="text" name="year" placeholder="Enter the Vehicle Year" required>
 
 
             <label for="seats">Seats<span class="req">*</span></label>

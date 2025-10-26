@@ -17,8 +17,6 @@ class Users {
     public function insertUser($name, $lastName, $ID, $birthDate, $gmail, $password, $address, $phoneNumber, $role, $file) {
         
         $this->picturePath = $this->uploadImage($file);
-
-        
         $encryptedPass = password_hash($password, PASSWORD_BCRYPT); // Encriptar contraseña
 
         // Sentencia SQL

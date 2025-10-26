@@ -118,7 +118,7 @@ fieldset.rows {
 }
 
 .vehicle-details>div input, .vehicle-details>div select {
-    width: 150%;
+    width: 100%;
     box-sizing: border-box;
     font-size: 1rem;
     padding: 8px;
