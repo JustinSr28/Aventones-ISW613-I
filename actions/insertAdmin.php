@@ -19,8 +19,5 @@ $user = new Users();
 
     echo $resultado === true ? "Usuario registrado correctamente" : $resultado; //ternario
 
-
-
-
-
+    
 ?>
