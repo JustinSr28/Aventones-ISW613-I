@@ -48,6 +48,3 @@ class Email {
     }
 }
 
-// ===== Ejemplo de uso =====
-$email = new Email();
-$email->send('murillocruzsheyla36@gmail.com', 'Shey', 'PRUEBA CORREO', 'This is the HTML message body <b>in bold!</b>');
