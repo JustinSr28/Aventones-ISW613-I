@@ -9,8 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $users -> getLoginData($username);
 
    
-    
-    //Deberia ser una funcion en la clase Users?
     if (mysqli_num_rows($result) > 0) {
 
         $user = mysqli_fetch_assoc($result);
@@ -22,8 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 $_SESSION['username'] = $user['gmail'];
                 $_SESSION['idUser'] = $user['idUser'];
+                $_SESSION['role'] = $user['role'];
 
-                verifyRoles($user['role']);
+                redirectByRole($user['role']);
 
             } else {
                 header("Location: ../index.html");
@@ -43,18 +42,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-function verifyRoles($role){
+function redirectByRole($role){
 
     if($role == 'Client'){
-        header("Location: ../pages/bookings.html");
+        header("Location: /pages/bookings.php");
         exit();
     }
     else if($role == 'Driver'){
-        header("Location: ../pages/myRides.html");
+        header("Location: /pages/myRides.html");
         exit();
     }
     else if($role == 'Admin'){
-        header("Location: ../pages/allUsers.php");
+        header("Location: /pages/allUsers.php");
         exit();
     }
 }

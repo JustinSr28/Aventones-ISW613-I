@@ -7,8 +7,9 @@ use PHPMailer\PHPMailer\Exception;
 
 
 //para que pueda cargar todas las dependencias.
-require '../library/vendor/autoload.php';
+//require '../library/vendor/autoload.php';
 //require __DIR__ . '/../library/vendor/autoload.php';
+require __DIR__ . '/../library/vendor/autoload.php';
 
 class Email {
     private $mail;
