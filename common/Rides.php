@@ -14,7 +14,7 @@ class Rides {
                 VALUES ($idUser, '$origin', '$destination', '$departureTime', '$rideDate', $costPerSeat, $availableSeats, '$status')";
 		// Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {
-			header("Location: ../pages/myRides.html");)
+			header("Location: ../pages/myRides.html");
             return true;
         } else {
             return "Error: " . $sql . "<br>" . $this->conexion->error;
@@ -40,7 +40,7 @@ class Rides {
 		}
 	}
 
-	// Método para cargar todos los rides de un usuario.
+	// Metodo para cargar todos los rides de un usuario.
 	public function loadRides($idUser) {
 		$rides = [];
 		$sql = "SELECT * FROM rides where idUser = '$idUser'";  
@@ -52,6 +52,8 @@ class Rides {
 		}
 		return $rides;
 	}
+
+	//
 }
 
 ?>

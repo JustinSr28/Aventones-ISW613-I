@@ -83,6 +83,8 @@ class Users {
         return mysqli_query($this->conexion, $sql);
     }
 
+    
+
 }
 ?>
 
