@@ -1,3 +1,22 @@
+<?php 
+    require_once "../common/Users.php";
+
+    session_start();
+    $idUser = $_SESSION['idUser'];
+
+    $user = new Users();
+    $result = $user -> getConfigurationData($idUser);
+
+    $publicName = "";
+    $publicBio = "";
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $publicName = $row['publicname'];
+        $publicBio = $row['publicbio'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +59,12 @@
 
     <main>
         <h1>Configuration</h1>
-        <form id="configuration_form">
+        <form action="../actions/saveConfiguration.php" method="POST" id="configuration_form">
             <label for="public-name">Public Name</label>
-            <input type="text" id="public-name" name="public-name" value="">
+            <input type="text" id="public-name" name="public-name" value="<?php echo $publicName ?>">
 
             <label for="public-bio">Public Bio</label>
-            <textarea id="public-bio" name="public-bio" rows="5"></textarea>
+            <textarea id="public-bio" name="public-bio"> <?php echo $publicBio ?> </textarea>
 
             <div class="buttons">
                 <a id="a-form" href="myRides.html">Cancel</a>

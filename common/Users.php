@@ -83,6 +83,21 @@ class Users {
         return mysqli_query($this->conexion, $sql);
     }
 
+    public function insertConfiguration($idUser,$publicName,$publicBio){
+        $sql = "INSERT INTO configuration (idUser,publicname,publicbio) VALUES ($idUser,'$publicName','$publicBio');";
+        mysqli_query($this -> conexion, $sql);
+        $this->conexion->close();
+    }
+
+    public function updateConfiguration($idUser,$publicName,$publicBio){
+        $sql = "UPDATE configuration SET publicname = '$publicName', publicbio = '$publicBio' WHERE idUser = $idUser";
+        mysqli_query($this -> conexion, $sql);
+    }
+
+    public function getConfigurationData($idUser){
+        $sql = "SELECT * FROM configuration WHERE idUser = $idUser";
+        return mysqli_query($this -> conexion, $sql);
+    }
     
 
 }
