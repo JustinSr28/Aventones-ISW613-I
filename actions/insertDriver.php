@@ -7,7 +7,7 @@ $email = new Email();
 $user = new Users();
 
 $firstName = $_POST['first-name'];
-$mail =  $_POST['gmail'];
+$mail =  $_POST['email'];
 
 $token = bin2hex(random_bytes(16));
 
