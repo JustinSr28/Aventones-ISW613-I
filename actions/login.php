@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../index.html");
         exit();
     }
-    $dataBase-> closeConnection();
 
 } else {
     header("Location: ../index.html");
