@@ -1,3 +1,9 @@
+<?php 
+    require_once "../common/Bookings.php";
+    session_start();
+    $idUser = $_SESSION['idUser'];
+    $role   = $_SESSION['role']; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
