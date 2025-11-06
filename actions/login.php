@@ -34,12 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../index.html");
         exit();
     }
-
-} else {
-    header("Location: ../index.html");
-    exit();
 }
-
 
 function redirectByRole($role){
 
@@ -48,7 +43,7 @@ function redirectByRole($role){
         exit();
     }
     else if($role == 'Driver'){
-        header("Location: /pages/myRides.html");
+        header("Location: /pages/myRides.php");
         exit();
     }
     else if($role == 'Admin'){
