@@ -1,4 +1,5 @@
 <?php
+
 require_once "../common/Bookings.php"; 
 
 $idBooking = $_GET['id'];
