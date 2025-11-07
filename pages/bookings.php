@@ -27,7 +27,7 @@
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="searchRides.php">Home</a></li>
                     <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
                     <li><a href="">Bookings</a></li>
                 </ul>
