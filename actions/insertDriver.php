@@ -27,7 +27,7 @@ $token = bin2hex(random_bytes(16));
 
     echo $resultado === true ? "Usuario registrado correctamente" : $resultado; //ternario
     if($resultado){
-        $email->send($mail, $firstName, "Hello $firstName! Activate your account now", "Link: http://workshop01isw.papaya/aventonesProyecto/pages/accountActivation.php?token=$token</b>");
+        $email->send($mail, $firstName, "Hello $firstName! Activate your account now", "Link: http://shey.web/pages/accountActivation.php?token=$token</b>");
     }
     header("Location: ../index.html");
     exit();

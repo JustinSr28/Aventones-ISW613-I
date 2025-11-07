@@ -43,7 +43,7 @@ function redirectByRole($role){
         exit();
     }
     else if($role == 'Driver'){
-        header("Location: /pages/myRides.php");
+        header("Location: /pages/Bookings.php");
         exit();
     }
     else if($role == 'Admin'){
