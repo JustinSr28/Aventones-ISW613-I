@@ -96,6 +96,8 @@ class Rides {
         	$sql .= " AND r.rideDate IN ($daysString)";
 		}
 
+		$sql .= " ORDER BY r.departureTime ASC";
+
     	$result = mysqli_query($this->conexion, $sql);
 
   

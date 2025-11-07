@@ -15,7 +15,7 @@ class Bookings{
     }
 
     public function loadBookings($idUser){
-        $query = "SELECT b.idBooking, u.name, u.lastName, r.origin, r.destination, b.status FROM bookings b JOIN users u ON b.idUser = u.idUser JOIN rides r ON b.idRide = r.idRide WHERE u.idUser = $idUser";
+        $query = "SELECT b.idBooking, u.name, u.lastName, r.origin, r.destination, b.status FROM bookings b JOIN users u ON b.idUser = u.idUser JOIN rides r ON b.idRide = r.idRide JOIN users d ON r.idUser = d.idUser WHERE u.idUser = $idUser OR r.idUser = $idUser;";
         $result = mysqli_query($this->conexion, $query);
         $bookings = [];
         while ($row = mysqli_fetch_assoc($result)) {
