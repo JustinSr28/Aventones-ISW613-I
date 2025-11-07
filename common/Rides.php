@@ -54,55 +54,16 @@ class Rides {
 	}
 
 	private function fetchRides($sql) {
-    $rides = [];
-    $result = mysqli_query($this->conexion, $sql);
+    	$rides = [];
+    	$result = mysqli_query($this->conexion, $sql);
 
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $rides[] = $row;
-        }
-    }
-    return $rides;
-}
-
-	public function filterByOrigin($origin) {
-    	$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat 
-		FROM rides r 
-        JOIN users u ON r.idUser = u.idUser 
-        JOIN vehicles c ON r.idVehicle = c.idVehicle 
-        WHERE r.origin = '$origin'";
-		return $this->fetchRides($sql);
+    	if ($result && $result->num_rows > 0) {
+        	while ($row = $result->fetch_assoc()) {
+            	$rides[] = $row;
+        	}
+    	}
+    	return $rides;
 	}
-
-	public function filterByDestination($destination) {
-    	$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat 
-        FROM rides r 
-        JOIN users u ON r.idUser = u.idUser 
-        JOIN vehicles c ON r.idVehicle = c.idVehicle 
-        WHERE r.destination = '$destination'";
-    	return $this->fetchRides($sql);
-	}
-
-	public function filterByDay($dayList) {
-    	$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat 
-        FROM rides r 
-        JOIN users u ON r.idUser = u.idUser 
-        JOIN vehicles c ON r.idVehicle = c.idVehicle 
-        WHERE r.rideDate IN ($dayList)";
-		return $this->fetchRides($sql);
-	}
-
-	public function filterRides($origin, $destination, $dayList) {
-    	$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat 
-        FROM rides r 
-        JOIN users u ON r.idUser = u.idUser 
-        JOIN vehicles c ON r.idVehicle = c.idVehicle 
-        WHERE r.origin = '$origin' 
-        AND r.destination = '$destination' 
-        AND r.rideDate IN ($dayList)";
-		return $this->fetchRides($sql);
-}
-
 
 	public function getOrigin(){
 		$sql = "SELECT DISTINCT r.origin FROM rides r;";
@@ -113,12 +74,41 @@ class Rides {
 		$sql = "SELECT DISTINCT r.destination FROM rides r;";
 		return $this->fetchRides($sql);
 	}
+	public function filter($origin = "",$destination="",$days= []){
+		$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat, r.idRide 
+		FROM rides r 
+        JOIN users u ON r.idUser = u.idUser 
+        JOIN vehicles c ON r.idVehicle = c.idVehicle 
+        WHERE 1=1";
 
 
+    	if (!empty($origin)) {
+        	$sql .= " AND r.origin = '$origin'";
+    	}
 
 
+    	if (!empty($destination)) {
+        	$sql .= " AND r.destination = '$destination'";
+    	}
 
-	//
+    	if (!empty($days)) {
+       		$daysString = "'" . implode("','", $days) . "'";
+        	$sql .= " AND r.rideDate IN ($daysString)";
+		}
+
+    	$result = mysqli_query($this->conexion, $sql);
+
+  
+    	if ($result) {
+        	return mysqli_fetch_all($result, MYSQLI_ASSOC);
+   	    } 
+		else {
+        	echo "Error en la consulta: " . mysqli_error($this->conexion);
+        	return [];
+    	}
+
+	}
+
 }
 
 ?>

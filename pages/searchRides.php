@@ -1,8 +1,20 @@
 <?php 
-    require_once "../common/Bookings.php";
+    require_once "../common/Rides.php";
     session_start();
     $idUser = $_SESSION['idUser'];
     $role   = $_SESSION['role']; 
+
+    $rides = new Rides();
+
+    $origins = $rides->getOrigin();
+    $destinations = $rides->getDestination();
+
+    $ridesList = [];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $origin = $_POST['from'] ?? "";
+        $destination = $_POST['to'] ?? "";
+        $days = $_POST['days'] ?? [];
+        $ridesList = $rides->filter($origin, $destination, $days);}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,15 +59,35 @@
 
     <main>
         <h1>Search Rides</h1>
-        <form id="search-form">
+        <form id="search-form" method="POST" >
             <section class="section-search">
                 <div class="places">
                     <label>From</label>
-                    <select class="select-from" id="from-select">
+                    <select class="select-from" id="from-select" name="from">
+
+                        <option value="">-- Select origin --</option>
+
+                        <?php foreach ($origins as $origin) { ?>
+                            <option value="<?= $origin['origin'] ?>">  
+                                <?= $origin['origin']?> 
+                            </option>
+                        <?php } ?>  
+
                     </select>
+
                     <label>To</label>
-                    <select class="select-to" id="to-select">
+                    <select class="select-to" id="to-select" name="to">
+
+                        <option value="">-- Select destination --</option>
+
+                        <?php foreach ($destinations as $destination) { ?>
+                            <option value="<?= $destination['destination'] ?>" > 
+                                <?= $destination['destination']?>
+                            </option>
+                        <?php } ?>
+                    
                     </select>
+
                     <button type="submit"> Find Rides</button>
                 </div>
 
@@ -92,6 +124,18 @@
                     </tr>
                 </thead>
                 <tbody id="search_list">
+                    <?php foreach ($ridesList as $ride) { ?>
+                    <tr>
+                        <td> <?= $ride['name'] . " " . $ride['lastName'] ?> </td>
+                        <td> <?= $ride['origin'] ?></td>
+                        <td> <?= $ride['destination'] ?></td>
+                        <td> <?= $ride['availableSeats'] ?></td>
+                        <td> <?= $ride['brand'] . " - " . $ride['model'] ?> </td>
+                        <td> <?= $ride['costPerSeat'] ?></td>
+
+                        <td> <a href="../actions/insertBooking.php?idRide=<?= $ride['idRide'] ?>">Request</a> </td>
+                    </tr>
+                <?php } ?>
                 </tbody>
             </table>
 
