@@ -20,7 +20,7 @@ class Users {
 
         // Sentencia SQL
         $sql = "INSERT INTO users (ID, name, lastName, gmail, phoneNumber, picture, password, role, token, status)
-                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$token', 'inactive')";
+                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$token', 'pending')";
 
         // Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {

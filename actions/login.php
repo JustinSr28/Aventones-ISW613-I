@@ -6,35 +6,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     $users = new Users();
-    $result = $users -> getLoginData($username);
+    $result = $users->getLoginData($username);
 
-   
     if (mysqli_num_rows($result) > 0) {
-
         $user = mysqli_fetch_assoc($result);
 
-        if(password_verify($password,$user['password'])){
-            if ($user['status'] == 'active'){
-                
+        if (password_verify($password, $user['password'])) {
+
+            if ($user['status'] == 'active') {
                 session_start();
-                
                 $_SESSION['username'] = $user['gmail'];
                 $_SESSION['idUser'] = $user['idUser'];
                 $_SESSION['role'] = $user['role'];
 
                 redirectByRole($user['role']);
-
-            } else {
-                header("Location: ../index.html");
+            } 
+            elseif ($user['status'] == 'pending') {
+                header("Location: ../index.php?error=pending");
+                exit();
+            } 
+            else {
+                header("Location: ../index.php?error=inactive");
                 exit();
             }
+        } else {
+            header("Location: ../index.php?error=password");
+            exit();
         }
-    }
-    else {
-        header("Location: ../index.html");
+    } else {
+        header("Location: ../index.php?error=notfound");
         exit();
     }
 }
+
+
 
 function redirectByRole($role){
 

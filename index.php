@@ -26,9 +26,23 @@
 
                 <br>
                 <div class="inputClass">
-                    <label for="password" >Password <br></label>
+                    <label for="password">Password <br></label>
                     <input type="password" id="password" name="password">
                 </div>
+
+                <p id="loginError">
+                    <?php
+                    if (isset($_GET['error'])) {
+                    switch($_GET['error']) {
+                    case "password": echo "Incorrect password"; break;
+                    case "inactive": echo "Your account is inactive"; break;
+                    case "pending": echo "Account pending approval"; break;
+                    case "notfound": echo "User not found"; break;
+                    }
+                    }
+                    ?>
+                </p>
+
 
                 <p>Not a user? <a href="pages/userRegistration.html">Register Now</a></p>
 
