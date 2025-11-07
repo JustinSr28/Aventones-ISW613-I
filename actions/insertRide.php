@@ -9,16 +9,14 @@ $fee = $_POST['fee'];
 $plate = $_POST['plate'];
 $status = 'active';
 
-if (isset($_POST['days'])) {
-    $days = implode(",", $_POST['days']); //Une array a string separado de ,
-} else {
-    $days = "";
-}
+$days = isset($_POST['days']) ? implode(",", $_POST['days']) : "";
 
 session_start();
 $idUser = $_SESSION['idUser'];
+
 $rideObj = new Rides();
-$result = $rideObj->insertRide($idUser, $departureFrom, $arriveTo, $time, $days, $fee, $seats, $status);
+$idVehicle = $rideObj->foundIdVehicleByPlate($plate);
 
-
+$result = $rideObj->insertRide($idUser, $departureFrom, $arriveTo, $time, $days, $fee, $seats, $status, $idVehicle);
 ?>
+

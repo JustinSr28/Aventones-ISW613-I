@@ -161,7 +161,7 @@ h1::after {
     margin-bottom: 3rem;
 }
 
-select, input[type="number"] {
+select, input[type="number"], input[type="time"]{
     padding: 5% 10%;
     font-family: var(--fuente-registro);
     border: 1px solid #acabab; ;

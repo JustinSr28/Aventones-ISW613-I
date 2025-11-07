@@ -9,16 +9,28 @@ class Rides {
 		$this->conexion = $db->getConnection();
 	}
 
-	function insertRide($idUser, $origin, $destination, $departureTime, $rideDate, $costPerSeat, $availableSeats, $status){
-		$sql = "INSERT INTO rides (idUser, origin, destination, departureTime, rideDate, costPerSeat, availableSeats, status)
-                VALUES ($idUser, '$origin', '$destination', '$departureTime', '$rideDate', $costPerSeat, $availableSeats, '$status')";
+	function insertRide($idUser, $origin, $destination, $departureTime, $days, $costPerSeat, $availableSeats, $status, $idVehicule){
+		$sql = "INSERT INTO rides (idUser, origin, destination, departureTime, rideDate, costPerSeat, availableSeats, status, idVehicle)
+                VALUES ($idUser, '$origin', '$destination', '$departureTime', '$days', $costPerSeat, $availableSeats, '$status', $idVehicule)";
 		// Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {
-			header("Location: ../pages/myRides.html");
+			header("Location: ../pages/myRides.php");
             return true;
         } else {
             return "Error: " . $sql . "<br>" . $this->conexion->error;
         }
+	}
+
+	function foundIdVehicleByPlate($plate){
+		$sql = "SELECT idVehicle FROM vehicles WHERE plateNumber = '$plate'";
+		$result = $this->conexion->query($sql);
+		if ($result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+			return $row['idVehicle'];
+		} else {
+			return null;
+		}
+
 	}
 
 	function updateSeatsPerRide($idRide, $availableSeats){

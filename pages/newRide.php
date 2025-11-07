@@ -66,18 +66,18 @@
 
                 <div>
                     <label for="time">Time <br></label>
-                    <input type="text" id="time" name="time">
+                    <input type="time" id="time" name="time">
                       
                 </div>
 
                 <div>
                     <label for="seats">Seats <br></label>
-                    <input type="number" min="1" max="100" step="1" value="1" id="seats" name="seats">
+                    <input type="number" min="1" step="1" value="1" id="seats" name="seats">
                 </div>
 
                 <div>
                     <label for="fee">Fee per Seat <br></label>
-                    <input type="number" min="1" max="100" step="1" value="1" id="fee" name="fee">
+                    <input type="number" min="1" max="100" step="1" value="1" id="fee" name="fee"> 
                 </div>
 
             </fieldset>
@@ -91,17 +91,23 @@
             $vehicleObj = new Vehicles();
             $vehicles = $vehicleObj->loadVehicles($idUser);
             ?>
+           
            <?php foreach ($vehicles as $vehicle): ?>
 
                 <div class="vehicle-details">
-                    <div>
-                        <label for="plate">Plate & Brand<br></label>
-                        <select id="plate" name="plate">
-                        <option value="<?= htmlspecialchars($vehicle['plateNumber']) ?>"><?= htmlspecialchars($vehicle['plateNumber']) . ' ' . htmlspecialchars($vehicle['brand'])?></option>
-
-                        </select>
-                    </div>  
-                </div>
+                <div>
+                    <label for="plate">Plate & Brand<br></label>
+                    <select id="plate" name="plate">
+                        <?php foreach ($vehicles as $vehicle): ?>
+                            <option 
+                                value="<?= htmlspecialchars($vehicle['plateNumber']) ?>"
+                                data-max="<?= htmlspecialchars($vehicle['seatCapacity']) ?>"> 
+                                <?= htmlspecialchars($vehicle['plateNumber']) . ' ' . htmlspecialchars($vehicle['brand'])?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>  
+            </div>
            <?php endforeach; ?>
 
             <div class="button-rows">
@@ -125,6 +131,7 @@
 
     </footer>
 
+    <script src="../JavaScript/maxSeats.js"></script>
 </body>
 
 </html>
