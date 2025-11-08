@@ -133,7 +133,8 @@ class Rides {
 		$sql = "SELECT DISTINCT r.destination FROM rides r;";
 		return $this->fetchRides($sql);
 	}
-	public function filter($origin = "",$destination="",$days= []){
+
+	public function filter($origin = "",$destination="",$days= [], $orderBy = "departureTime", $order = "ASC"){
 		$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat, r.idRide 
 		FROM rides r 
         JOIN users u ON r.idUser = u.idUser 
@@ -155,7 +156,15 @@ class Rides {
         	$sql .= " AND r.rideDate IN ($daysString)";
 		}
 
-		$sql .= " ORDER BY r.departureTime ASC";
+		
+		if ($orderBy ===  "from") {
+        	$sql .= " ORDER BY r.origin $order";
+    	} else if ($orderBy === "to") {
+        	$sql .= " ORDER BY r.destination $order";
+    	} else if ($orderBy === "departureTime") {
+        	$sql .= " ORDER BY r.departureTime ASC";
+    	}
+
 
     	$result = mysqli_query($this->conexion, $sql);
 
@@ -168,6 +177,15 @@ class Rides {
         	return [];
     	}
 
+	}
+
+	public function loadRideDetails($idRide){
+		$sql = "SELECT r.origin,r.destination,r.rideDate,r.departureTime,r.availableSeats,r.costPerSeat,v.plateNumber,v.brand,r.idRide
+		FROM rides r 
+		JOIN users u ON r.idUser = u.idUser 
+		JOIN vehicles v ON r.idVehicle = v.idVehicle 
+		WHERE idRide=$idRide;";
+		return  mysqli_query($this->conexion, $sql);
 	}
 
 }
