@@ -3,7 +3,7 @@
     session_start();
     $idUser = $_SESSION['idUser'];
     $role   = $_SESSION['role']; 
-
+   
     $rides = new Rides();
 
     $origins = $rides->getOrigin();
@@ -30,15 +30,35 @@
         }
     }
 
+    
 
     $ridesList = [];
     $days = $_POST['days'] ?? [];
 
+    $originSelected = '';
+    $destinationSelected = '';
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $origin = $_POST['from'] ?? "";
-        $destination = $_POST['to'] ?? "";
-        $ridesList = $rides->filter($origin, $destination, $days, $orderBy,$order);
+        $originSelected = $_POST['from'] ?? "";
+        $destinationSelected = $_POST['to'] ?? "";
+        $ridesList = $rides->filter($originSelected, $destinationSelected, $days, $orderBy, $order);
     }
+
+    function isSelected($value, $selectedValue) {
+        if ($value === $selectedValue) {
+            return 'selected';
+        }
+        return '';
+    }
+    
+    function getOrderLabel($orderByCol, $currentOrderBy, $order) {
+        $label = 'ASC';
+        if ($orderByCol === $currentOrderBy && $order === 'DESC') {
+            $label = 'DESC';
+        }
+        return $label;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,28 +108,21 @@
                 <div class="places">
                     <label>From</label>
                     <select class="select-from" id="from-select" name="from">
-
                         <option value="">-- Select origin --</option>
-
-                        <?php foreach ($origins as $origin) { ?>
-                            <option value="<?= $origin['origin'] ?>" <?php if (isset($_POST['from']) && $_POST['from']  === $origin['origin']) echo 'selected'; ?>>  
-                                <?= $origin['origin']?> 
-                            </option>
-                        <?php } ?>  
-
+                            <?php foreach ($origins as $origin) { 
+                                $selected = isSelected($origin['origin'], $originSelected);
+                            ?>
+                            <option value="<?= $origin['origin'] ?>" <?= $selected ?>><?= $origin['origin'] ?></option>
+                            <?php } ?>
                     </select>
 
-                    <label>To</label>
                     <select class="select-to" id="to-select" name="to">
-
                         <option value="">-- Select destination --</option>
-
-                        <?php foreach ($destinations as $destination) { ?>
-                            <option value="<?= $destination['destination'] ?>" <?php if (isset($_POST['to']) && $_POST['to']  === $destination['destination']) echo 'selected'; ?>> 
-                                <?= $destination['destination']?>
-                            </option>
+                        <?php foreach ($destinations as $destination) { 
+                            $selected = isSelected($destination['destination'], $destinationSelected);
+                        ?>
+                        <option value="<?= $destination['destination'] ?>" <?= $selected ?>><?= $destination['destination'] ?></option>
                         <?php } ?>
-                    
                     </select>
 
                     <button type="submit"> Find Rides</button>
@@ -143,29 +156,14 @@
                     <tr>
                         <th>Driver</th>
                         <th>From
-                            <?php
-                                $label = 'Asc';
-                                if ($orderBy === 'from' && $order === 'desc') {
-                                    $label = 'Desc';
-                                }
-                            ?>
-                            <button type="submit" name="change_order" value="from">
-                                <?php echo $label; ?>
-                            </button>
+                            <?php $label = getOrderLabel('from', $orderBy, $order); ?>
+                            <button type="submit" name="change_order" value="from"><?= $label ?></button>
                         </th>
 
                         <th>To
-                            <?php
-                                $label = 'Asc';
-                                if ($orderBy === 'to' && $order === 'desc') {
-                                    $label = 'Desc';
-                                }
-                            ?>
-                            <button type="submit" name="change_order" value="to">
-                                <?php echo $label; ?>
-                            </button>
+                            <?php $label = getOrderLabel('to', $orderBy, $order); ?>
+                            <button type="submit" name="change_order" value="to"><?= $label ?></button>
                         </th>
-
                         <th>Seats</th>
                         <th>Car</th>
                         <th>Fee</th>
