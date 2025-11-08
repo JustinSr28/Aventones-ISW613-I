@@ -30,7 +30,7 @@
                 <ul>
                     <li><a href="searchRides.php">Home</a></li>
                     <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <li><a href="myRides.php">Bookings</a></li>
                 </ul>
             </nav>
 

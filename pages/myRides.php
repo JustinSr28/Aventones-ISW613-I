@@ -74,14 +74,15 @@
             session_start();
             $idUser = $_SESSION['idUser'];
             $objRides = new Rides();
-            $rides = $objRides->loadRides($idUser);
+            $rides = $objRides->loadRides(10);
 
             ?>
 
             <?php foreach ($rides as $ride): ?>
 
             <tr>
-                        <td><?= htmlspecialchars($ride['origin']) ?></td>
+                        
+                        <td><a href="rideDetails.php?id=<?= $ride['idRide'] ?>"><?= $ride['origin']?></a></td>
                         <td><?= htmlspecialchars($ride['destination']) ?></td>
                         <td><?= htmlspecialchars($ride['availableSeats']) ?></td>
                         <td><?= htmlspecialchars($ride['departureTime']) ?></td>
