@@ -1,6 +1,8 @@
 <?php
 include_once('../common/Users.php');
 
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -22,19 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 redirectByRole($user['role']);
             } 
             elseif ($user['status'] == 'pending') {
-                header("Location: ../index.php?error=pending");
+                header("Location: ../pages/login.php?error=pending");
                 exit();
             } 
             else {
-                header("Location: ../index.php?error=inactive");
+                header("Location: ../pages/login.php?error=inactive");
                 exit();
             }
         } else {
-            header("Location: ../index.php?error=password");
+            header("Location: ../pages/login.php?error=password");
             exit();
         }
     } else {
-        header("Location: ../index.php?error=notfound");
+        header("Location: ../pages/login.php?error=notfound");
         exit();
     }
 }
@@ -44,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function redirectByRole($role){
 
     if($role == 'Client'){
-        header("Location: ../pages/bookings.php");
+        header("Location: ../pages/searchRides.php");
         exit();
     }
     else if($role == 'Driver'){
