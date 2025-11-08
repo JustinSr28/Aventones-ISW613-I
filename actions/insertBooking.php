@@ -27,7 +27,7 @@ $result = $bookings -> insertBooking($idRide, $idUser);
 if ($result) {
     $rides-> updateAvailableSeats($idRide);
 } else {
-    mysqli_error($this->conexion);
+    echo($result);
 }
 
 header("Location: ../pages/searchRides.php");
