@@ -16,6 +16,17 @@ h1 {
     text-align: center;
 }
 
+.error-box {
+    background: #ffe5e5;
+    color: #c70000;
+    padding: 12px 18px;
+    border-left: 4px solid #c70000;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-family: Arial;
+}
+
+
 h1::after {
     content: "";
     display: block;
@@ -85,6 +96,18 @@ td{
 
 }
 
+    td > a {
+        background-color: #4338ca !important;
+        border: 2px solid #4338ca;
+        color: #ffffff !important;
+        font-size: 100%;
+        border-radius: 8px;
+        padding: 1% 6%;
+        font-family: var(--fuente-registro);
+        text-decoration: none;
+    }
+
+
 /* CheckBox */
 .status-toggle {
     width: 20px;
@@ -139,6 +162,8 @@ a.foot {
 a.foot:hover {
     color: #4e73df;
 }
+
+
 
 /*All users*/
 .hidden{

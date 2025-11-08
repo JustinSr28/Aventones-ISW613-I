@@ -30,6 +30,17 @@ class Bookings{
     }
 
     
+   public function getBookingsByRide($idRide) {
+     $query = "SELECT * FROM bookings WHERE idRide = $idRide AND status = 'active'";
+     $result = mysqli_query($this->conexion, $query);
+
+       if ($result && $result->num_rows > 0) {
+            return true; // Tiene reservas activas
+       } else {
+            return false; // NO tiene reservas activas
+       }
+   }
+
 
 }
 ?>

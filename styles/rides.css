@@ -164,7 +164,7 @@ h1::after {
 select, input[type="number"], input[type="time"]{
     padding: 5% 10%;
     font-family: var(--fuente-registro);
-    border: 1px solid #acabab; ;
+    border: 1px solid #acabab; 
     border-radius: 8px;
     
 }
@@ -227,6 +227,17 @@ nav>div>a {
     justify-content: space-between;
     margin-top: 2rem;
 }
+
+    .button-rows > a {
+        background-color: red;
+        border: 2px solid red;
+        color: #ffffff !important;
+        font-size: 100%;
+        border-radius: 8px;
+        padding: 1% 6%;
+        font-family: var(--fuente-registro);
+        text-decoration: none; 
+    }
 
 button{
     background-color:  #4338ca !important;

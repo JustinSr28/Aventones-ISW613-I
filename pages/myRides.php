@@ -42,8 +42,15 @@
     <main>
         <h1>My rides</h1>
 
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error-box">
+                <?= htmlspecialchars($_GET['error']); ?>
+            </div>
+        <?php endif; ?>
+
+
         <div class="button-cont">
-            <a id="newRideBtn" class="button" href="newRide.html">New Ride</a>
+            <a id="newRideBtn" class="button" href="newRide.php">New Ride</a>
         </div>
         
         <table>
@@ -52,13 +59,41 @@
                     <th>From</th>
                     <th>To</th>
                     <th>Seats</th>
-                    <th>Car</th>
+                    <th>Time</th>
+                    <th>Days</th>
+                    
                     <th id="feeTable">Fee</th>
+                    <th>Status</th>
                     <th id="actionTable">Actions</th>
 
                 </tr>
             </thead>
             <tbody id="ride_list">
+            <?php
+            require_once "../common/Rides.php";
+            session_start();
+            $idUser = $_SESSION['idUser'];
+            $objRides = new Rides();
+            $rides = $objRides->loadRides($idUser);
+
+            ?>
+
+            <?php foreach ($rides as $ride): ?>
+
+            <tr>
+                        <td><?= htmlspecialchars($ride['origin']) ?></td>
+                        <td><?= htmlspecialchars($ride['destination']) ?></td>
+                        <td><?= htmlspecialchars($ride['availableSeats']) ?></td>
+                        <td><?= htmlspecialchars($ride['departureTime']) ?></td>
+                        <td><?= htmlspecialchars($ride['rideDate']) ?></td>
+                        <td><?= htmlspecialchars($ride['costPerSeat']) ?></td>       
+                        <td><?= htmlspecialchars($ride['status']) ?></td>   
+                        <td>
+                            <a href="editRide.php?id=<?= $ride['idRide'] ?>">Edit</a>
+                        </td>
+            </tr>
+
+            <?php endforeach; ?>
             </tbody>
         </table>
     </main>

@@ -20,6 +20,37 @@ class Rides {
             return "Error: " . $sql . "<br>" . $this->conexion->error;
         }
 	}
+	
+	public function UpdateRide($idRide, $idUser, $origin, $destination, $departureTime, $days, $costPerSeat, $availableSeats, $status, $idVehicle){
+		$sql = "UPDATE rides 
+				SET origin = '$origin',
+					destination = '$destination',
+					departureTime = '$departureTime',
+					rideDate = '$days',
+					costPerSeat = $costPerSeat,
+					availableSeats = $availableSeats,
+					status = '$status',
+					idVehicle = $idVehicle
+				WHERE idRide = $idRide AND idUser = $idUser";
+		if ($this->conexion->query($sql) === TRUE) {
+			return true;
+		} else {
+			return "Error updating ride: " . $this->conexion->error;
+		}
+	}
+
+	public function desactivateRide($idRide, $idUser){
+		$sql = "UPDATE rides 
+				SET status = 'inactive'
+				WHERE idRide = $idRide AND idUser = $idUser";
+		if ($this->conexion->query($sql) === TRUE) {
+			return true;
+		} else {
+			return "Error updating ride: " . $this->conexion->error;
+		}
+	}
+
+
 
 	function foundIdVehicleByPlate($plate){
 		$sql = "SELECT idVehicle FROM vehicles WHERE plateNumber = '$plate'";
@@ -64,6 +95,22 @@ class Rides {
 		}
 		return $rides;
 	}
+
+	public function getRideById($idRide) {
+		$sql = "SELECT r.*, v.plateNumber, v.brand 
+				FROM rides r
+				JOIN vehicles v ON r.idVehicle = v.idVehicle
+				WHERE r.idRide = $idRide";
+            
+		$result = $this->conexion->query($sql);
+
+		if ($result->num_rows > 0) {
+			return $result->fetch_assoc();
+		}
+		return null;
+	}
+
+
 
 	private function fetchRides($sql) {
     	$rides = [];
