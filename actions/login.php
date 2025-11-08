@@ -44,15 +44,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function redirectByRole($role){
 
     if($role == 'Client'){
-        header("Location: /pages/bookings.php");
+        header("Location: ../pages/bookings.php");
         exit();
     }
     else if($role == 'Driver'){
-        header("Location: /pages/Bookings.php");
+        header("Location: ../pages/bookings.php");
         exit();
     }
     else if($role == 'Admin'){
-        header("Location: /pages/allUsers.php");
+        header("Location: ../pages/allUsers.php");
         exit();
     }
 }
