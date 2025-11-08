@@ -1,5 +1,5 @@
 <?php
-require_once "../common/conectionBD.php";
+require_once "conectionBD.php";
 
 class Rides {
 	private $conexion;
@@ -135,7 +135,7 @@ class Rides {
 	}
 
 	public function filter($origin = "",$destination="",$days= [], $orderBy = "departureTime", $order = "ASC"){
-		$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat, r.idRide 
+		$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat, r.idRide, c.year 
 		FROM rides r 
         JOIN users u ON r.idUser = u.idUser 
         JOIN vehicles c ON r.idVehicle = c.idVehicle 
