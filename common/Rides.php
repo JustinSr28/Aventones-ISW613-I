@@ -139,7 +139,7 @@ class Rides {
 		FROM rides r 
         JOIN users u ON r.idUser = u.idUser 
         JOIN vehicles c ON r.idVehicle = c.idVehicle 
-        WHERE 1=1";
+        WHERE r.status = 'active'";
 
 
     	if (!empty($origin)) {
@@ -186,6 +186,11 @@ class Rides {
 		JOIN vehicles v ON r.idVehicle = v.idVehicle 
 		WHERE idRide=$idRide;";
 		return  mysqli_query($this->conexion, $sql);
+	}
+
+	public function updateAvailableSeats($idRide){
+		$sql = "UPDATE rides SET availableSeats = availableSeats -1 WHERE idRide = $idRide";  
+		mysqli_query($this->conexion, $sql);
 	}
 
 }
