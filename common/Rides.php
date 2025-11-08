@@ -139,7 +139,7 @@ class Rides {
 		FROM rides r 
         JOIN users u ON r.idUser = u.idUser 
         JOIN vehicles c ON r.idVehicle = c.idVehicle 
-        WHERE r.status = 'active'";
+        WHERE r.status = 'active' AND r.availableSeats > 0";
 
 
     	if (!empty($origin)) {
