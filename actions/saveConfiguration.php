@@ -2,6 +2,13 @@
 
 require_once "../common/Users.php";
 
+session_start();
+
+if (!isset($_SESSION['idUser'])) {
+    header("Location: ../index.html");
+    exit();
+}
+
 $user = new Users();
 
 session_start();

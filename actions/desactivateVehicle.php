@@ -4,6 +4,10 @@ require_once "../common/Rides.php";
 
 session_start();
 
+if (!isset($_SESSION['idUser'])) {
+    header("Location: ../index.html");
+    exit();
+}
 $idVehicle = $_GET['id'];
 $idUser = $_SESSION['idUser'];
 

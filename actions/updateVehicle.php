@@ -23,7 +23,7 @@ $vehicleObj = new Vehicles();
 
 
 $picturePath = null;
-if (!empty($_FILES['picture']['name'])) {
+if (!empty($_FILES['picture']['name'])) { 
     $picturePath = $vehicleObj->uploadImage($_FILES['picture']);
 }
 

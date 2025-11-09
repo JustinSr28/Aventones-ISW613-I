@@ -1,5 +1,11 @@
 <?php 
 require_once "../common/Rides.php";
+session_start();
+
+if (!isset($_SESSION['idUser'])) {
+    header("Location: ../index.html");
+    exit();
+}
 
 $departureFrom = $_POST['departure-from'];
 $arriveTo = $_POST['arrive-to'];

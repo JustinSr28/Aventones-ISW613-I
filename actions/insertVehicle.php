@@ -1,8 +1,15 @@
 <?php
 include('../common/Vehicles.php');
 
+session_start();
+
+if (!isset($_SESSION['idUser'])) {
+    header("Location: ../index.html");
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	session_start();
+	
 	$idUser = $_SESSION['idUser']; // Obtener el ID del usuario desde la sesión
 	
 	$brand = $_POST['brand'];

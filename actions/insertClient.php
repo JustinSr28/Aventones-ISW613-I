@@ -1,6 +1,13 @@
 <?php
 require_once "../common/Users.php";
 require_once "../actions/Email.php";
+
+session_start();
+
+if (!isset($_SESSION['idUser'])) {
+    header("Location: ../index.html");
+    exit();
+}
 $user = new Users();
 $email = new Email();
 
