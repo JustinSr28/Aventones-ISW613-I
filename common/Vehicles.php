@@ -30,7 +30,7 @@ Class Vehicles{
 		$this->conexion->close();
 	}
 	// Subida de imagen
-	private function uploadImage($file) {
+	public function uploadImage($file) {
 		if (!is_dir($this->uploadDir)) {
 			mkdir($this->uploadDir, 0777, true);
 		}
@@ -60,9 +60,51 @@ Class Vehicles{
 		return $vehicles;
 	}
 
+	
+
+	public function getVehicleById($idVehicle){
+		$sql = "SELECT * FROM vehicles where idVehicle = $idVehicle";
+		$result = $this->conexion->query($sql);
+		if ($result->num_rows > 0) {
+			return $result->fetch_assoc();
+		}
+	}
+
+	public function updateVehicle($idVehicle, $idUser, $plateNumber, $color, $brand, $model, $year, $seatCapacity, $picturePath = null, $status) {
+    if ($picturePath) { //Si trae imagen nueva la guardamos
+        $sql = "UPDATE vehicles 
+                SET plateNumber = '$plateNumber',
+                    color = '$color',
+                    brand = '$brand',
+                    model = '$model',
+					year = $year,
+                    seatCapacity = $seatCapacity,
+                    picture = '$picturePath',
+					status = '$status'
+                WHERE idVehicle = $idVehicle AND idUser = $idUser";
+    } else {
+        $sql = "UPDATE vehicles 
+                SET plateNumber = '$plateNumber',
+                    color = '$color',
+                    brand = '$brand',
+                    model = '$model',
+					year = $year,
+                    seatCapacity = $seatCapacity,
+					status = '$status'
+                WHERE idVehicle = $idVehicle AND idUser = $idUser";
+    }
+
+    if ($this->conexion->query($sql) === TRUE) {
+        return true;
+    } else {
+        return "Error updating vehicle: " . $this->conexion->error;
+    }
+}
+
+
 	//Método para eliminar vehículo (cambiar estado a inactive)
-	public function deleteVehicle($idVehicle) {
-		$sql = "UPDATE vehicles SET status = 'inactive' WHERE idVehicle = $idVehicle";  
+	public function desactivateVehicle($idVehicle, $idUser) {
+		$sql = "UPDATE vehicles SET status = 'inactive' WHERE idVehicle = $idVehicle AND idUser = $idUser";  
 		if ($this->conexion->query($sql) === TRUE) {
 			return true;
 		} else {

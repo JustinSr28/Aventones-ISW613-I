@@ -137,6 +137,18 @@ input[type="file"] {
     transition: background .15s, border-color .15s, color .15s;
 }
 
+.form-actions > a {
+    background-color: red;
+    border: 2px solid red;
+    color: #ffffff !important;
+    font-size: 100%;
+    border-radius: 8px;
+    padding: 1% 6%;
+    font-family: var(--fuente-registro);
+    text-decoration: none;
+}
+
+
 .btn-primary {
     background: var(--primary);
     color: #fff;

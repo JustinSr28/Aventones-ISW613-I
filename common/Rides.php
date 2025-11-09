@@ -193,6 +193,16 @@ class Rides {
 		mysqli_query($this->conexion, $sql);
 	}
 
+	public function getRideByVehicle($idVehicle) {
+     $query = "SELECT * FROM rides WHERE idVehicle = $idVehicle AND status = 'active'";
+     $result = mysqli_query($this->conexion, $query);
+
+       if ($result && $result->num_rows > 0) {
+            return true; // Tiene reservas activas
+       } else {
+            return false; // NO tiene reservas activas
+       }
+	}	
 }
 
 ?>

@@ -74,7 +74,7 @@
             session_start();
             $idUser = $_SESSION['idUser'];
             $objRides = new Rides();
-            $rides = $objRides->loadRides(10);
+            $rides = $objRides->loadRides($idUser);
 
             ?>
 

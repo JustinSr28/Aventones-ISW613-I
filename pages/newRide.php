@@ -81,7 +81,6 @@
                 </div>
 
             </fieldset>
-
             <h2>My Vehicles</h2>
             <?php
             require_once "../common/Vehicles.php";
@@ -91,11 +90,7 @@
             $vehicleObj = new Vehicles();
             $vehicles = $vehicleObj->loadVehicles($idUser);
             ?>
-           
-           <?php foreach ($vehicles as $vehicle): ?>
-
                 <div class="vehicle-details">
-                <div>
                     <label for="plate">Plate & Brand<br></label>
                     <select id="plate" name="plate">
                         <?php foreach ($vehicles as $vehicle): ?>
@@ -106,10 +101,7 @@
                             </option>
                         <?php endforeach; ?>
                     </select>
-                </div>  
-            </div>
-           <?php endforeach; ?>
-
+                </div>
             <div class="button-rows">
                 <a href="">cancel</a>
                 <button type="submit">Create</button>

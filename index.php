@@ -65,15 +65,15 @@
     <meta charset="UTF-8">
     <title>My Rides</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/generalStyle.css">
-    <link rel="stylesheet" href="../styles/searchRides.css">
+    <link rel="stylesheet" href="styles/generalStyle.css">
+    <link rel="stylesheet" href="styles/searchRides.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
     <header>
-        <img src="../images/logo.png" class="design-logo" alt="Aventones Logo">
+        <img src="images/logo.png" class="design-logo" alt="Aventones Logo">
 
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
@@ -82,7 +82,7 @@
 
             <div class="navigation-cont">
                 <div class="user-menu">
-                    <img src="../images/user.png" class="navigation-image" alt="User icon">
+                    <img src="images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
                             <li><a href="pages/login.php">Login</a></li>

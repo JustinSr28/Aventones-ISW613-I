@@ -39,6 +39,11 @@
     </header>
     <main>
         <h1>My Vehicles</h1>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error-box">
+                <?= htmlspecialchars($_GET['error']); ?>
+            </div>
+        <?php endif; ?>
 
         <div class="button-cont">
             <a id="newVehicleBtn" class="button" href="newVehicle.html">Add New Vehicle</a>
@@ -53,6 +58,7 @@
                     <th>Model</th>
                     <th>Year</th>
                     <th>Seats</th>
+                    <th>Status</th>
                     <th id="picture"></th>
                     <th id="actionTable">Actions</th>
 
@@ -75,7 +81,11 @@
                         <td><?= htmlspecialchars($vehicle['model']) ?></td>
                         <td><?= htmlspecialchars($vehicle['year']) ?></td>
                         <td><?= htmlspecialchars($vehicle['seatCapacity']) ?></td>
+                        <td><?= htmlspecialchars($vehicle['status']) ?></td>
                         <td><img src="../<?= htmlspecialchars($vehicle['picture']) ?>" alt="Vehicle Image" width="100"></td>
+                        <td>
+                            <a href="editMyVehicles.php?id=<?= $vehicle['idVehicle'] ?>">Edit</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
