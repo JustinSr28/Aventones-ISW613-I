@@ -91,8 +91,8 @@
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="" id="logout-link">Logout</a></li>
-                            <li><a href="">Profile</a></li>
+                            <li><a href="newAdmin.html" id="logout-link">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
                             <li><a href="" class="activo">Configuration</a></li>
                         </ul>
                     </nav>

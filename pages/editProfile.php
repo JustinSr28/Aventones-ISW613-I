@@ -1,3 +1,16 @@
+<?php
+require_once "../common/Users.php";
+
+session_start();
+
+$idUser = $_SESSION['idUser'];
+
+$userData = new Users();
+$userResult = $userData -> loadUserData($idUser);
+
+$user= mysqli_fetch_assoc($userResult);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,55 +54,57 @@
 
     <main>
         <h1>Edit Profile</h1>
-        <form action="myRides.html" method="post" class="formRider">
+        <form action="../actions/updateUser.php" method="post" class="formRider" enctype="multipart/form-data">
             <div>
                 <label for="first-name">First Name <br></label>
-                <input type="text" id="first-name" name="firs-name">
+                <input type="text" id="first-name" name="first-name" value = "<?= $user['name'] ?>">
             </div>
 
             <div>
                 <label for="last-name">Last Name<br></label>
-                <input type="text" id="last-name" name="last-name">
+                <input type="text" id="last-name" name="last-name" value = "<?= $user['lastName']?>">
             </div>
 
             <div>
-                <label for="id-card">Last Name<br></label>
-                <input type="text" id="id-card" name="id-card">
+                <label for="id-card">ID<br></label>
+                <input type="text" id="id-card" name="id-card" value = "<?= $user['ID']?>">
             </div>
 
              <div>
                 <label for="birth-date">Birth Date<br></label>
-                <input type="date" id="birth-date" name="birth-date" required>
+                <input type="date" id="birth-date" name="birth-date" value = "<?= $user['birthDate']?>" required >
             </div>
 
             <div class="bigElement">
                 <label for="email">Email<br></label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email" value = "<?= $user['gmail']?>">
             </div>
 
             <div>
                 <label for="password">Password<br></label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" >
             </div>
 
             <div>
                 <label for="repeat-password">Repeat Password<br></label>
-                <input type="password" id="repeat-password" name="repeat-password">
+                <input type="password" id="repeat-password" name="repeat-password" >
             </div>
 
             <div class="bigElement">
                 <label for="address">Address<br></label>
-                <input type="text" id="address" name="address">
+                <input type="text" id="address" name="address" value = "<?= $user['address']?>">
             </div>
 
             <div>
                 <label for="phone-number">Phone Number<br></label>
-                <input type="tel" id="phone-number" name="phone-number">
+                <input type="tel" id="phone-number" name="phone-number" value = "<?= $user['phoneNumber']?>">
             </div>
 
             <div>
                 <label for="user-photo">Photo<br></label>
                 <input type="file" id="user-photo" name="user-photo" accept="image/*">
+                <img src="../<?= $user['picture'] ?>" alt="Vehicle Image" width="100"></td>
+                
             </div>
 
             <div>

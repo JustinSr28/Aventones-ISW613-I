@@ -11,7 +11,7 @@ $idRide = $_GET['id'];
 $ridesResult = $ridesObj->loadRideDetails($idRide);
 
 $ride = mysqli_fetch_assoc($ridesResult);
-$rideDays = explode(',', $ride['rideDate']); // Convierte la cadena en array: ['Mon','Tue','Wed']
+$rideDays = explode(',', $ride['rideDate']); 
 
 ?>
 

@@ -13,7 +13,7 @@ Class Vehicles{
 		$this->conexion = $db->getConnection();
 	}
 
-	// Método para insertar vehículo
+	// Mï¿½todo para insertar vehï¿½culo
 	public function insertVehicle($idUser, $plateNumber, $color, $brand, $model, $year, $file, $seatCapacity) {
 		
 		$this->picturePath = $this->uploadImage($file);
@@ -26,7 +26,7 @@ Class Vehicles{
 		} else {
 			return "Error: " . $sql . "<br>" . $this->conexion->error;
 		}
-		// Cerrar conexión
+		// Cerrar conexiï¿½n
 		$this->conexion->close();
 	}
 	// Subida de imagen
@@ -47,7 +47,7 @@ Class Vehicles{
 		return "images/vehicles/default.jpg";
 	}
 
-	// Método para cargar todos los vehículos de un usuario.
+	// Mï¿½todo para cargar todos los vehï¿½culos de un usuario.
 	public function loadVehicles($idUser) {
 		$vehicles = [];
 		$sql = "SELECT * FROM vehicles where idUser = '$idUser'";  
@@ -59,6 +59,7 @@ Class Vehicles{
 		}
 		return $vehicles;
 	}
+
 
 	
 
@@ -102,14 +103,25 @@ Class Vehicles{
 }
 
 
-	//Método para eliminar vehículo (cambiar estado a inactive)
 	public function desactivateVehicle($idVehicle, $idUser) {
-		$sql = "UPDATE vehicles SET status = 'inactive' WHERE idVehicle = $idVehicle AND idUser = $idUser";  
-		if ($this->conexion->query($sql) === TRUE) {
-			return true;
-		} else {
-			return "Error: " . $sql . "<br>" . $this->conexion->error;
-		}
+	$sql = "UPDATE vehicles SET status = 'inactive' WHERE idVehicle = $idVehicle AND idUser = $idUser";  
+	if ($this->conexion->query($sql) === TRUE) {
+		return true;
+	} else {
+		return "Error: " . $sql . "<br>" . $this->conexion->error;
+	}
+}
+
+	//valida si ya un carro estÃ¡ seleccionado en un ride, si es asÃ­ no se puede ser desactivado
+	public function isVehicleAssigned($idVehicle){
+		$sql = "SELECT COUNT(*) AS total FROM rides WHERE idVehicle = $idVehicle;";
+		$result = mysqli_query($this->conexion,$sql);
+		
+		if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total'] > 0;
+    	}
+		 return false; 
 	}
 }
 
