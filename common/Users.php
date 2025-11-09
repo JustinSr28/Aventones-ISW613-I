@@ -19,8 +19,8 @@ class Users {
         $encryptedPass = password_hash($password, PASSWORD_BCRYPT); // Encriptar contraseña
 
         // Sentencia SQL
-        $sql = "INSERT INTO users (ID, name, lastName, gmail, phoneNumber, picture, password, role, token, status)
-                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$token', 'pending')";
+        $sql = "INSERT INTO users (ID, name, lastName, gmail, phoneNumber, picture, password, role, token, status,birthDate,address)
+                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$token', 'pending', '$birthDate', '$address')";
 
         // Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {
@@ -98,6 +98,22 @@ class Users {
         $sql = "SELECT * FROM configuration WHERE idUser = $idUser";
         return mysqli_query($this -> conexion, $sql);
     }
+
+    public function updateUser($idUser,$name, $lastName, $ID, $gmail, $password, $address, $phoneNumber,  $file,$birthDate){
+        $this->picturePath = $this->uploadImage($file);
+        $encryptedPass = password_hash($password, PASSWORD_BCRYPT); 
+        $sql = "UPDATE users  
+        SET ID = $ID ,name = '$name', lastName = '$lastName', gmail = '$gmail', phoneNumber = '$phoneNumber', picture = '$this->picturePath', password = '$encryptedPass', birthDate = '$birthDate' ,address = '$address'  WHERE idUser = $idUser";
+        mysqli_query($this -> conexion, $sql);
+    }
+
+    public function loadUserData($idUser){
+        $sql = "SELECT ID,name,lastName,gmail,phoneNumber,picture,password,birthDate,address FROM users WHERE idUser = $idUser";
+        return  mysqli_query($this -> conexion, $sql);
+    }
+
+
+
     
 
 }
