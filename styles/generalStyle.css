@@ -49,7 +49,7 @@ nav.Head:hover {
     background-color: #c6c6c6;
 }
 
-header>img[src="../images/logo.png"] {
+header>img[src="../images/logo.png"] , img[src="images/logo.png"] {
     display: flex;
 }
 

@@ -105,21 +105,23 @@ form{
     ;
 }
 
-nav,a.foot{
+footer>p {
     text-align: center;
     text-decoration: none;
     font-family: var(--fuente-registro);
-    font-size:20px ;
-    color: #000000;
+    font-size: 100%;
+    color: #616161;
+}
+
+footer nav,
+a.foot {
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--fuente-registro);
+    font-size: 100%;
+    color: #616161;
     margin-bottom: 15px;
+    cursor: default;         
+    pointer-events: none;  
 }
-footer >p{
-    text-align: center;
-    text-decoration: none;
-    font-family: var(--fuente-registro);
-    font-size:20px ;color: #000000;
-}
-
-
-
 
