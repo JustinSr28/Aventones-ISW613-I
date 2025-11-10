@@ -31,7 +31,7 @@ class Bookings{
 
     
    public function getBookingsByRide($idRide) {
-     $query = "SELECT * FROM bookings WHERE idRide = $idRide AND status = 'active'";
+     $query = "SELECT * FROM bookings WHERE idRide = $idRide AND status = 'accepted'";
      $result = mysqli_query($this->conexion, $query);
 
        if ($result && $result->num_rows > 0) {
