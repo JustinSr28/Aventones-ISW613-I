@@ -5,16 +5,12 @@ require_once "../actions/Email.php";
 
 session_start();
 
-if (!isset($_SESSION['idUser'])) {
-    header("Location: ../index.html");
-    exit();
-}
 
 $email = new Email();
 $user = new Users();
 
 $firstName = $_POST['first-name'];
-$mail =  $_POST['email'];
+$mail =  $_POST['gmail'];
 
 $token = bin2hex(random_bytes(16));
 
@@ -36,6 +32,6 @@ $token = bin2hex(random_bytes(16));
     if($resultado){
         $email->send($mail, $firstName, "Hello $firstName! Activate your account now", "Link: http://shey.web/pages/accountActivation.php?token=$token</b>");
     }
-    header("Location: ../index.html");
+   header("Location: ../pages/login.php");
     exit();
 ?>
