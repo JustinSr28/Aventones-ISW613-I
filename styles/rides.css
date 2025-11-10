@@ -190,8 +190,10 @@ nav>div>a {
 }
 
 .profile-picture {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
+     border-radius: 50%;
+    object-fit: cover; 
 }
 .driver-name {
     margin-top: 10px;
