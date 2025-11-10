@@ -104,6 +104,7 @@ Class Vehicles{
 
 
 	public function desactivateVehicle($idVehicle, $idUser) {
+		
 	$sql = "UPDATE vehicles SET status = 'inactive' WHERE idVehicle = $idVehicle AND idUser = $idUser";  
 	if ($this->conexion->query($sql) === TRUE) {
 		return true;
@@ -112,7 +113,6 @@ Class Vehicles{
 	}
 }
 
-	//valida si ya un carro está seleccionado en un ride, si es así no se puede ser desactivado
 	public function isVehicleAssigned($idVehicle){
 		$sql = "SELECT COUNT(*) AS total FROM rides WHERE idVehicle = $idVehicle;";
 		$result = mysqli_query($this->conexion,$sql);
