@@ -5,17 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <title>User Registration</title>
-    <link rel="stylesheet" href="../styles/register.css">
+    <link rel="stylesheet" href="../styles/generalStyle.css">
+    <link rel="stylesheet" href="../styles/activateAccount.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <img src="../images/logo.png" class="image" alt="Aventones Logo" />
+        <img src="../images/logo.png" class="design-logo" alt="Aventones Logo">
     </header>
 
     <main>
         <h1>Activate Account</h1>
+
+       
         <?php
             require_once "../common/Users.php";
             require_once "../common/conectionBD.php";
@@ -24,19 +27,20 @@
             $user = new Users();
             $token = $_GET['token'];
             $user -> activateUser($token);
-            header('Location: ../index.html');
+           
         ?>
+        <p class="message">¡Tu cuenta ha sido activada exitosamente!</p>
+        <a href="login.php" class="btn">Ir al login</a>
+       
     </main>
     
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 
