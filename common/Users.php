@@ -34,25 +34,22 @@ class Users {
     }
 
     // Subida de imagen
-    private function uploadImage($file) {
-        if (!is_dir($this->uploadDir)) {
-            mkdir($this->uploadDir, 0777, true);
-        }
-
-        if (!empty($file['name'])) {
-            $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION) ?: 'jpg');
-            $newName = uniqid("user_", true) . "." . $ext;
-            $dest = $this->uploadDir . $newName;
-
-            if (move_uploaded_file($file['tmp_name'], $dest)) {
-                return "images/users/" . $newName;
-            } else {
-                die("Error uploading the photo.");
-            }
-        }
-
-        return "images/users/default.jpg";
-    }
+    public function uploadImage($file) {
+		if (!is_dir($this->uploadDir)) {
+			mkdir($this->uploadDir, 0777, true);
+		}
+		if (!empty($file['name'])) {
+			$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION) ?: 'jpg');
+			$newName = uniqid("users_", true) . "." . $ext;
+			$dest = $this->uploadDir . $newName;
+			if (move_uploaded_file($file['tmp_name'], $dest)) {
+				return "images/users/" . $newName;
+			} else {
+				die("Error uploading the photo.");
+			}
+		}
+		return "images/users/default.jpg";
+	}
 
     // Método para cargar todos los usuarios
     public function loadUsers() {
@@ -99,16 +96,27 @@ class Users {
         return mysqli_query($this -> conexion, $sql);
     }
 
-    public function updateUser($idUser,$name, $lastName, $ID, $gmail, $password, $address, $phoneNumber,  $file,$birthDate){
-        $this->picturePath = $this->uploadImage($file);
+    public function updateUser($idUser,$name, $lastName, $ID, $gmail, $password, $address, $phoneNumber,  $picturePath = null,$birthDate){
         $encryptedPass = password_hash($password, PASSWORD_BCRYPT); 
-        $sql = "UPDATE users  
-        SET ID = $ID ,name = '$name', lastName = '$lastName', gmail = '$gmail', phoneNumber = '$phoneNumber', picture = '$this->picturePath', password = '$encryptedPass', birthDate = '$birthDate' ,address = '$address'  WHERE idUser = $idUser";
+        if($picturePath){
+            $sql = "UPDATE users  
+            SET ID = $ID ,name = '$name', lastName = '$lastName', gmail = '$gmail', phoneNumber = '$phoneNumber', picture = '$picturePath', password = '$encryptedPass', birthDate = '$birthDate' ,address = '$address'  WHERE idUser = $idUser";
+        }
+        else {
+            $sql = "UPDATE users  
+            SET ID = $ID ,name = '$name', lastName = '$lastName', gmail = '$gmail', phoneNumber = '$phoneNumber', password = '$encryptedPass', birthDate = '$birthDate' ,address = '$address'  WHERE idUser = $idUser";
+        }
+        
         mysqli_query($this -> conexion, $sql);
     }
 
     public function loadUserData($idUser){
         $sql = "SELECT ID,name,lastName,gmail,phoneNumber,picture,password,birthDate,address FROM users WHERE idUser = $idUser";
+        return  mysqli_query($this -> conexion, $sql);
+    }
+
+    public function loadLastPicture($idUser){
+        $sql = "SELECT picture FROM users WHERE idUser = $idUser;";
         return  mysqli_query($this -> conexion, $sql);
     }
 
