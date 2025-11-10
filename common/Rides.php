@@ -12,7 +12,7 @@ class Rides {
 	function insertRide($idUser, $origin, $destination, $departureTime, $days, $costPerSeat, $availableSeats, $status, $idVehicule){
 		$sql = "INSERT INTO rides (idUser, origin, destination, departureTime, rideDate, costPerSeat, availableSeats, status, idVehicle)
                 VALUES ($idUser, '$origin', '$destination', '$departureTime', '$days', $costPerSeat, $availableSeats, '$status', $idVehicule)";
-		// Ejecutar consulta
+	
         if ($this->conexion->query($sql) === TRUE) {
 			header("Location: ../pages/myRides.php");
             return true;
@@ -135,6 +135,11 @@ class Rides {
 	}
 
 	public function filter($origin = "",$destination="",$days= [], $orderBy = "departureTime", $order = "ASC"){
+		
+		if (empty($origin) && empty($destination) && empty($days)) {
+        return []; 
+    	}
+
 		$sql = "SELECT u.name, u.lastName, r.origin, r.destination, r.availableSeats, c.brand, c.model, r.costPerSeat, r.idRide, c.year 
 		FROM rides r 
         JOIN users u ON r.idUser = u.idUser 
@@ -151,10 +156,13 @@ class Rides {
         	$sql .= " AND r.destination = '$destination'";
     	}
 
-    	if (!empty($days)) {
-       		$daysString = "'" . implode("','", $days) . "'";
-        	$sql .= " AND r.rideDate IN ($daysString)";
-		}
+		if (!empty($days)) {
+        	$likeConditions = [];
+        	foreach ($days as $day) {
+            	$likeConditions[] = "r.rideDate LIKE '%$day%'";
+        }
+        	$sql .= " AND (" . implode(" OR ", $likeConditions) . ")";
+    }
 
 		
 		if ($orderBy ===  "from") {
@@ -180,7 +188,7 @@ class Rides {
 	}
 
 	public function loadRideDetails($idRide){
-		$sql = "SELECT r.origin,r.destination,r.rideDate,r.departureTime,r.availableSeats,r.costPerSeat,v.plateNumber,v.brand,r.idRide
+		$sql = "SELECT r.origin,r.destination,r.rideDate,r.departureTime,r.availableSeats,r.costPerSeat,v.plateNumber,v.brand,r.idRide,u.picture
 		FROM rides r 
 		JOIN users u ON r.idUser = u.idUser 
 		JOIN vehicles v ON r.idVehicle = v.idVehicle 
@@ -194,6 +202,7 @@ class Rides {
 	}
 
 	public function getRideByVehicle($idVehicle) {
+		
      $query = "SELECT * FROM rides WHERE idVehicle = $idVehicle AND status = 'active'";
      $result = mysqli_query($this->conexion, $query);
 
