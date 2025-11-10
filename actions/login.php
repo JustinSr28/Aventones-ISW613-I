@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $user['password'])) {
 
-            if ($user['status'] == 'active') {
+            if ($user['status'] === "active") {
                 session_start();
                 $_SESSION['username'] = $user['gmail'];
                 $_SESSION['idUser'] = $user['idUser'];
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 redirectByRole($user['role']);
             } 
-            elseif ($user['status'] == 'pending') {
+            elseif ($user['status'] === "pending") {
                 header("Location: ../pages/login.php?error=pending");
                 exit();
             } 

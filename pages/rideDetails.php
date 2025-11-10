@@ -1,17 +1,22 @@
 <?php 
-require_once "../common/Rides.php"; 
+    require_once "../common/Rides.php"; 
 
-session_start();
-$role = $_SESSION['role'];
+    session_start();
+    if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+            header("Location: login.php");
+            exit();
+    }
+        
+    $role = $_SESSION['role'];
 
-$ridesObj = new Rides();
+    $ridesObj = new Rides();
 
-$idRide = $_GET['id'];
+    $idRide = $_GET['id'];
 
-$ridesResult = $ridesObj->loadRideDetails($idRide);
+    $ridesResult = $ridesObj->loadRideDetails($idRide);
 
-$ride = mysqli_fetch_assoc($ridesResult);
-$rideDays = explode(',', $ride['rideDate']); 
+    $ride = mysqli_fetch_assoc($ridesResult);
+    $rideDays = explode(',', $ride['rideDate']); 
 
 ?>
 
@@ -36,9 +41,17 @@ $rideDays = explode(',', $ride['rideDate']);
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <?php 
+                        if ($role === "Driver") {
+                            echo '<li id="rides-navegation"><a href="myVehicles.php">Vehicles</a></li>';
+                            echo '<li id="rides-navegation"><a href="myRides.php" class="activo">Rides</a></li>';
+                            echo '<li><a href="bookings.php">Bookings</a></li>';
+                        }
+                        else if ($role === "Client"){
+                            echo '<li><a href="searchRides.php" class="activo">Home</a></li>';
+                            echo '<li><a href="bookings.php">Bookings</a></li>';
+                        }
+                    ?>
                 </ul>
             </nav>
 
@@ -47,9 +60,9 @@ $rideDays = explode(',', $ride['rideDate']);
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="" id="logout-link">Logout</a></li>
-                            <li><a href="">Profile</a></li>
-                            <li><a href="" class="activo">Configuration</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -63,7 +76,7 @@ $rideDays = explode(',', $ride['rideDate']);
         <h1>Ride Details</h1>
 
         <figure class="driver-photo">
-            <img src="images/user.png" alt="Driver photo" class="profile-picture">
+            <img src="../<?= $ride['picture'] ?>" alt="Driver photo" class="profile-picture" ></td>
             <figcaption id="rider-name" class="driver-name" >Alana</figcaption>
         </figure>
 
@@ -96,12 +109,10 @@ $rideDays = explode(',', $ride['rideDate']);
 
             <fieldset class="details-rows">
 
+               
                 <div>
                     <label for="time">Time <br></label>
-                    <select id="time" name="time" disabled>
-                        <option value="10:00">10:00 am</option>
-                        <option value="11:00">11:00 am</option>
-                    </select>
+                    <input type="time" id="time" name="time" value="<?= $ride['departureTime'] ?>" disabled>
                 </div>
 
                 <div>
@@ -130,14 +141,14 @@ $rideDays = explode(',', $ride['rideDate']);
                 if ($role == "Driver") {
                 echo '
                     <div class="button-rows">
-                        <a href="#" id="cancel">cancel</a>
+                        <a href="myRides.php" id="cancel">cancel</a>
                         <button type="submit" disabled>Request</button>
                     </div>';
                 }
                 else {
                     echo '
                     <div class="button-rows">
-                        <a href="#" id="cancel">cancel</a>
+                        <a href="searchRides.php" id="cancel">cancel</a>
                         <button type="submit" >Request</button>
                     </div>';
                 }
@@ -151,12 +162,10 @@ $rideDays = explode(',', $ride['rideDate']);
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

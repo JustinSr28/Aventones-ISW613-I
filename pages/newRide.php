@@ -1,3 +1,16 @@
+<?php
+    require_once "../common/Vehicles.php";
+    session_start();
+    if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+        header("Location: login.php");
+        exit();
+    }
+    $role   = $_SESSION['role']; 
+    $idUser = $_SESSION['idUser']; // Obtener el idUser de la sesin
+            
+    $vehicleObj = new Vehicles();
+    $vehicles = $vehicleObj->loadVehicles($idUser);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +29,9 @@
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <li id="rides-navegation"><a href="myVehicles.php" >Vehicles</a></li>
+                    <li id="rides-navegation"><a href="myRides.php" class="activo">Rides</a></li>
+                    <li><a href="bookings.php" >Bookings</a></li>    
                 </ul>
             </nav>
 
@@ -27,9 +40,9 @@
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="" id="logout-link">Logout</a></li>
-                            <li><a href="">Profile</a></li>
-                            <li><a href="" class="activo">Configuration</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -82,14 +95,6 @@
 
             </fieldset>
             <h2>My Vehicles</h2>
-            <?php
-            require_once "../common/Vehicles.php";
-            session_start();
-            $idUser = $_SESSION['idUser']; // Obtener el idUser de la sesión
-            
-            $vehicleObj = new Vehicles();
-            $vehicles = $vehicleObj->loadVehicles($idUser);
-            ?>
                 <div class="vehicle-details">
                     <label for="plate">Plate & Brand<br></label>
                     <select id="plate" name="plate">
@@ -103,7 +108,7 @@
                     </select>
                 </div>
             <div class="button-rows">
-                <a href="">cancel</a>
+                <a id="a-form" href="myRides.php">Cancel</a>
                 <button type="submit">Create</button>
             </div>
         </form>

@@ -1,3 +1,23 @@
+<?php
+        require_once "../common/Rides.php";
+        require_once "../common/Vehicles.php";
+
+       session_start();
+        if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+            header("Location: login.php");
+            exit();
+        }
+        $role   = $_SESSION['role']; 
+        $idRide = $_GET['id'];
+        $rideObj = new Rides();
+        $vehicleObj = new Vehicles();
+
+        $ride = $rideObj->getRideById($idRide);
+        $vehicles = $vehicleObj->loadVehicles($_SESSION['idUser']);
+
+        $selectedDays = explode(",", $ride['rideDate']);
+        $days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +36,9 @@
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <li id="rides-navegation"><a href="myVehicles.php">Vehicles</a></li>
+                    <li id="rides-navegation"><a href="myRides.php" class="activo">Rides</a></li>
+                    <li><a href="bookings.php">Bookings</a></li>
                 </ul>
             </nav>
 
@@ -27,9 +47,9 @@
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="" id="logout-link">Logout</a></li>
-                            <li><a href="">Profile</a></li>
-                            <li><a href="" class="activo">Configuration</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -40,26 +60,6 @@
     <main>
     <h1>Edit Ride</h1>
 
-    <?php
-        require_once "../common/Rides.php";
-        require_once "../common/Vehicles.php";
-        session_start();
-
-        if (!isset($_GET['id'])) {
-            echo "<p>Error: Ride ID not provided.</p>";
-            exit();
-        }
-
-        $idRide = $_GET['id'];
-        $rideObj = new Rides();
-        $vehicleObj = new Vehicles();
-
-        $ride = $rideObj->getRideById($idRide);
-        $vehicles = $vehicleObj->loadVehicles($_SESSION['idUser']);
-
-        $selectedDays = explode(",", $ride['rideDate']);
-        $days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-    ?>
 
     <form class="formm" id="edit_ride_form" action="../actions/updateRide.php?id=<?= $idRide?>" method="POST">
         
@@ -126,7 +126,7 @@
         </div>
 
         <div class="button-rows">
-            <a href="myRides.php">Cancel</a>
+            <a id="a-form" href="myRides.php">Cancel</a>
             <a href="../actions/desactivateRide.php?id=<?= $ride['idRide'] ?>">Inactivate Ride</a>
             <button type="submit">Save/activate</button>
             
@@ -139,12 +139,10 @@
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

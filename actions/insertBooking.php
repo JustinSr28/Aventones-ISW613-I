@@ -5,9 +5,10 @@ require_once "../common/Rides.php";
 
 session_start();
 
-if (!isset($_SESSION['idUser'])) {
+if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+    echo "DEBUG: No hay sesión activa. Redirigiendo...";
     header("Location: ../pages/login.php");
-    exit;
+    exit();
 }
 
 $idUser = $_SESSION['idUser'];
@@ -30,5 +31,5 @@ if ($result) {
     echo($result);
 }
 
-header("Location: ../pages/searchRides.php");
+header("Location: ../pages/bookings.php");
 ?>

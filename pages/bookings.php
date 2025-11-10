@@ -1,10 +1,15 @@
 <?php 
-        require_once "../common/Bookings.php";
-        session_start();
-        $idUser = $_SESSION['idUser'];
-        $role   = $_SESSION['role']; 
-        $bookingsObj = new Bookings();
-        $bookings = $bookingsObj->loadBookings($idUser);
+    require_once "../common/Bookings.php";
+       
+    session_start();
+    if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+        header("Location: login.php");
+        exit();
+    }
+    $idUser = $_SESSION['idUser'];
+    $role   = $_SESSION['role']; 
+    $bookingsObj = new Bookings();
+    $bookings = $bookingsObj->loadBookings($idUser);
 ?>
 
 
@@ -26,11 +31,21 @@
         <img src="../images/logo.png" class="design-logo" alt="Aventones Logo">
 
         <div class="menu-cont">
+
+            
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="searchRides.php">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="myRides.php">Bookings</a></li>
+                    <?php 
+                        if ($role === "Driver") {
+                            echo '<li id="rides-navegation"><a href="myVehicles.php">Vehicles</a></li>';
+                            echo '<li id="rides-navegation"><a href="myRides.php">Rides</a></li>';
+                            echo '<li><a href="bookings.php" class="activo">Bookings</a></li>';
+                        }
+                        else if ($role === "Client"){
+                            echo '<li><a href="searchRides.php">Home</a></li>';
+                            echo '<li><a href="bookings.php" class="activo">Bookings</a></li>';
+                        }
+                    ?>
                 </ul>
             </nav>
 
@@ -39,9 +54,10 @@
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="../actions/logout.php" id="logout-link">Logout</a></li>
-                            <li><a href="editProfile.html">Profile</a></li>
-                            <li><a href="configuration.php" class="activo">Configuration</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
+                            
                         </ul>
                     </nav>
                 </div>
@@ -97,12 +113,10 @@
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

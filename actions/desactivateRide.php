@@ -4,8 +4,8 @@ require_once "../common/Bookings.php";
 
 session_start();
 
-if (!isset($_SESSION['idUser'])) {
-    header("Location: ../index.html");
+if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+    header("Location: ../pages/login.php");
     exit();
 }
 
@@ -17,7 +17,7 @@ $bookingObj = new Bookings();
 
 $status = $bookingObj->getBookingsByRide($idRide); 
 
-// Si NO tiene bookings activos, se puede desactivar
+
 if (!$status) { 
     $result = $rideObj->desactivateRide($idRide, $idUser);
 } else {

@@ -2,10 +2,23 @@
 require_once "../common/Users.php"; 
 
 session_start();
+if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+    echo "DEBUG: No hay sesión activa. Redirigiendo...";
+    header("Location: ../pages/login.php");
+    exit();
+}
+
+$users = new Users();
+
 $idUser = $_SESSION['idUser'];
 
 
-$users = new Users();
+$picturePath = null;
+if (!empty($_FILES['picture']['name'])) { 
+    $picturePath = $users->uploadImage($_FILES['picture']);
+}
+
+
 $users -> updateUser(
         $idUser,
         $_POST['first-name'],
@@ -15,7 +28,7 @@ $users -> updateUser(
         $_POST['password'],
         $_POST['address'],
         $_POST['phone-number'],
-        $_FILES['user-photo'],
+        $picturePath,
         $_POST['birth-date'],
     );
 

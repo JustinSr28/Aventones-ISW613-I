@@ -3,14 +3,15 @@ include('../common/Vehicles.php');
 
 session_start();
 
-if (!isset($_SESSION['idUser'])) {
-    header("Location: ../index.html");
+if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+    echo "DEBUG: No hay sesiÃ³n activa. Redirigiendo...";
+    header("Location: ../pages/login.php");
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
-	$idUser = $_SESSION['idUser']; // Obtener el ID del usuario desde la sesión
+	$idUser = $_SESSION['idUser']; // Obtener el ID del usuario desde la sesiï¿½n
 	
 	$brand = $_POST['brand'];
 	$model = $_POST['model'];

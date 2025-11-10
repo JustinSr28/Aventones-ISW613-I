@@ -1,10 +1,15 @@
 <?php
 require_once "../common/Users.php";
 
+
 session_start();
+    if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+        header("Location: login.php");
+        exit();
+    }
 
 $idUser = $_SESSION['idUser'];
-
+$role   = $_SESSION['role']; 
 $userData = new Users();
 $userResult = $userData -> loadUserData($idUser);
 
@@ -30,9 +35,20 @@ $user= mysqli_fetch_assoc($userResult);
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <?php 
+                        if ($role === "Driver") {
+                            echo '<li id="rides-navegation"><a href="myVehicles.php">Vehicles</a></li>';
+                            echo '<li id="rides-navegation"><a href="myRides.php">Rides</a></li>';
+                            echo '<li><a href="bookings.php">Bookings</a></li>';
+                        }
+                        else if ($role === "Client"){
+                            echo '<li><a href="searchRides.php">Home</a></li>';
+                            echo '<li><a href="bookings.php">Bookings</a></li>';
+                        }
+                        else {
+                            echo '<li><a href="allUsers.php" class="activo">Users</a></li>';
+                        }
+                    ?>
                 </ul>
             </nav>
 
@@ -41,9 +57,9 @@ $user= mysqli_fetch_assoc($userResult);
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="" id="logout-link">Logout</a></li>
-                            <li><a href="">Profile</a></li>
-                            <li><a href="" class="activo">Configuration</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -101,14 +117,23 @@ $user= mysqli_fetch_assoc($userResult);
             </div>
 
             <div>
-                <label for="user-photo">Photo<br></label>
-                <input type="file" id="user-photo" name="user-photo" accept="image/*">
-                <img src="../<?= $user['picture'] ?>" alt="Vehicle Image" width="100"></td>
-                
+                <label for="picture">Photo<br></label>
+                <input type="file" id="picture" name="picture" accept="image/*">
+                <img src="../<?= $user['picture'] ?>" alt="Image" width="100"></td>
             </div>
 
             <div>
-                <a href=""> cancel</a>
+                <?php 
+                    if ($role === "Driver") {
+                        echo '<a id="a-form" href="myRides.php">Cancel</a>';
+                    }
+                    else if ($role === "Client"){
+                        echo '<a id="a-form" href="searchRides.php">Cancel</a>';
+                    }
+                    else {
+                        echo '<a id="a-form" href="allUsers.php">Cancel</a>';
+                    }
+                ?>
 
             </div>
 
@@ -124,12 +149,10 @@ $user= mysqli_fetch_assoc($userResult);
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

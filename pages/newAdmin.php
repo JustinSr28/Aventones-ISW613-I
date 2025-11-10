@@ -1,3 +1,13 @@
+<?php 
+    session_start();
+   if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+    echo "DEBUG: No hay sesión activa. Redirigiendo...";
+    header("Location: ../pages/login.php");
+    exit();
+}
+    
+    $role   = $_SESSION['role']; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +27,7 @@
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <li><a href="allUsers.php" class="activo">Users</a></li>
                 </ul>
             </nav>
 
@@ -28,9 +36,9 @@
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="" id="logout-link">Logout</a></li>
-                            <li><a href="">Profile</a></li>
-                            <li><a href="" class="activo">Configuration</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -43,7 +51,7 @@
         <form action="../actions/insertAdmin.php" method="post" class="formRider">
             <div>
                 <label for="first-name">First Name <br></label>
-                <input type="text" id="first-name" name="firs-name">
+                <input type="text" id="first-name" name="first-name">
             </div>
 
             <div>
@@ -52,7 +60,7 @@
             </div>
 
             <div>
-                <label for="id-card">Last Name<br></label>
+                <label for="id-card">ID<br></label>
                 <input type="text" id="id-card" name="id-card">
             </div>
 
@@ -92,7 +100,7 @@
             </div>
 
             <div>
-                <a href=""> cancel</a>
+                <a href="allUsers.php"> cancel</a>
 
             </div>
 
@@ -108,12 +116,10 @@
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

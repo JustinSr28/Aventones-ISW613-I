@@ -1,3 +1,16 @@
+<?php 
+    require_once "../common/Vehicles.php";
+    session_start();
+    if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
+        header("Location: login.php");
+        exit();
+    }
+    
+    $role   = $_SESSION['role']; 
+    $idUser = $_SESSION['idUser'];
+    $vehicleObj = new Vehicles();
+    $vehicles = $vehicleObj->loadVehicles($idUser);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +30,10 @@
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <li id="rides-navegation"><a href="myVehicles.php" class="activo">Vehicles</a></li>
+                    <li id="rides-navegation"><a href="myRides.php">Rides</a></li>
+                    <li><a href="bookings.php">Bookings</a></li>
+                      
                 </ul>
             </nav>
 
@@ -28,9 +42,9 @@
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="" id="logout-link">Logout</a></li>
-                            <li><a href="">Profile</a></li>
-                            <li><a href="" class="activo">Configuration</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
+                            <li><a href="editProfile.php">Profile</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -46,7 +60,7 @@
         <?php endif; ?>
 
         <div class="button-cont">
-            <a id="newVehicleBtn" class="button" href="newVehicle.html">Add New Vehicle</a>
+            <a id="newVehicleBtn" class="button" href="newVehicle.php">Add New Vehicle</a>
         </div>
 
         <table>
@@ -65,13 +79,7 @@
                 </tr>
             </thead>
             <tbody id="vehicle_list">
-                <?php 
-                require_once "../common/Vehicles.php";
-                session_start();
-                $idUser = $_SESSION['idUser'];
-                $vehicleObj = new Vehicles();
-                $vehicles = $vehicleObj->loadVehicles($idUser);
-                ?>
+                
 
                 <?php foreach ($vehicles as $vehicle): ?>
                     <tr>
@@ -95,12 +103,10 @@
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 
