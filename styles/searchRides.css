@@ -185,15 +185,15 @@ section.section-search {
     flex-direction: column;
     width: 94%;
     margin: 30px auto;
-    padding: 25px; /* 🔹 relleno interno para que el blanco cubra todo */
-    background-color: #ffffff; /* 🔹 fondo blanco completo */
-    border: 1px solid #d1d5db; /* 🔹 gris suave (más claro que antes) */
-    border-radius: 10px; /* 🔹 bordes redondeados */
+    padding: 25px; 
+    background-color: #ffffff; 
+    border: 1px solid #d1d5db; 
+    border-radius: 10px; 
     font-family: var(--fuente-registro);
 }
 div.places,
 div.main-days-cont {
-    background-color: #ffffff; /* gris casi blanco para contraste */
+    background-color: #ffffff; 
     border-radius: 6px;
     padding: 15px 20px;
     margin: 10px 0;
@@ -205,4 +205,23 @@ div.all-days{
 }
 div > label {
     background: #ffffff;
+}
+footer>p {
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--fuente-registro);
+    font-size: 100%;
+    color: #616161;
+}
+
+footer nav,
+a.foot {
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--fuente-registro);
+    font-size: 100%;
+    color: #616161;
+    margin-bottom: 15px;
+    cursor: default;         
+    pointer-events: none;  
 }

@@ -1,64 +1,5 @@
 <?php 
-    require_once "../common/Rides.php";
-    session_start();
-    $idUser = $_SESSION['idUser'];
-    $role   = $_SESSION['role']; 
-   
-    $rides = new Rides();
-
-    $origins = $rides->getOrigin();
-    $destinations = $rides->getDestination();
-    
-    $order = 'ASC';
-    $orderBy = 'departureTime';
-
-    if (isset($_POST['order'])) {
-        $order = $_POST['order'];
-    }
-
-    if (isset($_POST['orderBy'])) {
-        $orderBy = $_POST['orderBy'];
-    }
-
-    if (isset($_POST['change_order'])) {
-        $orderBy = $_POST['change_order'];
-
-        if ($order === 'ASC') {
-            $order = 'DESC';
-        } else {
-            $order = 'ASC';
-        }
-    }
-
-    
-
-    $ridesList = [];
-    $days = $_POST['days'] ?? [];
-
-    $originSelected = '';
-    $destinationSelected = '';
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $originSelected = $_POST['from'] ?? "";
-        $destinationSelected = $_POST['to'] ?? "";
-        $ridesList = $rides->filter($originSelected, $destinationSelected, $days, $orderBy, $order);
-    }
-
-    function isSelected($value, $selectedValue) {
-        if ($value === $selectedValue) {
-            return 'selected';
-        }
-        return '';
-    }
-    
-    function getOrderLabel($orderByCol, $currentOrderBy, $order) {
-        $label = 'ASC';
-        if ($orderByCol === $currentOrderBy && $order === 'DESC') {
-            $label = 'DESC';
-        }
-        return $label;
-    }
-
+require_once "../actions/searchRides.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,9 +21,8 @@
         <div class="menu-cont">
             <nav class="Head" aria-label="Main menu">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li id="rides-navegation"><a href="" class="activo">Rides</a></li>
-                    <li><a href="">Bookings</a></li>
+                    <li><a href="searchRides.php" class="activo">Home</a></li>
+                    <li><a href="bookings.php">Bookings</a></li>     
                 </ul>
             </nav>
 
@@ -91,9 +31,9 @@
                     <img src="../images/user.png" class="navigation-image" alt="User icon">
                     <nav class="menu-hover">
                         <ul>
-                            <li><a href="newAdmin.html" id="logout-link">Logout</a></li>
+                            <li><a href="../actions/logout.php">Logout</a></li>
                             <li><a href="editProfile.php">Profile</a></li>
-                            <li><a href="" class="activo">Configuration</a></li>
+                            <li><a href="configuration.php">Configuration</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -205,12 +145,10 @@
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> |
+            <a href="login.php" class="foot">Login</a> |
+            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 
