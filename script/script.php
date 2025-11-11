@@ -47,7 +47,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     $found = false;
 
     for ($i = 0; $i < count($drivers); $i++) {
-        if ($drivers[$i]['email'] === $driverEmail) {
+        if ($drivers[$i]['gmail'] === $driverEmail) {
             $drivers[$i]['bookings'][] = $row; 
             $found = true;
             break;
