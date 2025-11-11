@@ -77,7 +77,7 @@
 
         <figure class="driver-photo">
             <img src="../<?= $ride['picture'] ?>" alt="Driver photo" class="profile-picture" ></td>
-            <figcaption id="rider-name" class="driver-name" >Alana</figcaption>
+            <figcaption id="rider-name" class="driver-name" ><?= $ride['name']?></figcaption>
         </figure>
 
         <form class="formm" id="ride_details_form" action= "../actions/insertBooking.php" method="POST">
