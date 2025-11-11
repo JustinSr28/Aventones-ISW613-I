@@ -7,10 +7,15 @@ session_start();
 
 $user = new Users();
 $email = new Email();
-
+$status = "pending";
 
 $firstName = $_POST['first-name'];
 $mail =  $_POST['gmail'];
+
+if ($user->checkEmailExists($mail)) {
+    header("Location: ../pages/userRegistration.php?error=" . urlencode("Email already registered"));
+    exit();
+}
 
 $token = bin2hex(random_bytes(16));
 
@@ -25,7 +30,8 @@ $token = bin2hex(random_bytes(16));
         $_POST['phone-number'],
         "Client",
         $_FILES['user-photo'],
-        $token
+        $token,
+        $status
     );
 
     echo $resultado === true ? "Usuario registrado correctamente" : $resultado; //ternario

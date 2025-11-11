@@ -13,14 +13,14 @@ class Users {
     }
 
     // Método para insertar usuario
-    public function insertUser($name, $lastName, $ID, $birthDate, $gmail, $password, $address, $phoneNumber, $role, $file,$token) {
+    public function insertUser($name, $lastName, $ID, $birthDate, $gmail, $password, $address, $phoneNumber, $role, $file,$token,$status) {
         
         $this->picturePath = $this->uploadImage($file);
         $encryptedPass = password_hash($password, PASSWORD_BCRYPT); // Encriptar contraseña
 
         // Sentencia SQL
         $sql = "INSERT INTO users (ID, name, lastName, gmail, phoneNumber, picture, password, role, token, status,birthDate,address)
-                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$token', 'pending', '$birthDate', '$address')";
+                VALUES ($ID, '$name', '$lastName', '$gmail', '$phoneNumber', '$this->picturePath', '$encryptedPass', '$role', '$token', '$status', '$birthDate', '$address')";
 
         // Ejecutar consulta
         if ($this->conexion->query($sql) === TRUE) {
@@ -120,11 +120,25 @@ class Users {
         return  mysqli_query($this -> conexion, $sql);
     }
 
+    public function checkEmailExists($email){
+        $sql = "SELECT COUNT(*) AS total FROM users WHERE gmail = '$email'";
+        $result = mysqli_query($this->conexion, $sql);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return $row['total'] > 0;
+        } else {
+            return false;
+        }
+    }
+        
+    }
+
 
 
     
 
-}
+
 ?>
 
 

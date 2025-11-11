@@ -169,3 +169,13 @@ a.foot {
     cursor: default;         
     pointer-events: none;  
 }
+
+.error-box {
+    background: #ffe5e5;
+    color: #c70000;
+    padding: 12px 18px;
+    border-left: 4px solid #c70000;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-family: Arial;
+}

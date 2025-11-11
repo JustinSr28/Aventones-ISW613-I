@@ -48,6 +48,13 @@
 
     <main>
         <h1>New Administrator</h1>
+
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error-box">
+                <?= htmlspecialchars($_GET['error']); ?>
+            </div>
+        <?php endif; ?>
+
         <form action="../actions/insertAdmin.php" method="post" class="formRider">
             <div>
                 <label for="first-name">First Name <br></label>
@@ -119,7 +126,7 @@
             <a href="editProfile.php" class="foot">Profile</a> |
             <a href="configuration.php" class="foot">Settings</a> |
             <a href="login.php" class="foot">Login</a> |
-            <a href="userRegistration.html" class="foot">Register</a>
+            <a href="userRegistration.php" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 
