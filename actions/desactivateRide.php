@@ -15,12 +15,12 @@ $idUser = $_SESSION['idUser'];
 $rideObj = new Rides();
 $bookingObj = new Bookings();
 
-$status = $bookingObj->getBookingsByRide($idRide); 
+$status = $bookingObj->getBookingsByRide($idRide);  //Si existe un booking activo del ride
 
 
-if (!$status) { 
+if (!$status) {  //Si NO existe, puede desactivarse
     $result = $rideObj->desactivateRide($idRide, $idUser);
-} else {
+} else {    //SI existe, no puede desactivarse
     $result = "Cannot deactivate ride with active bookings.";
 }
 
@@ -28,7 +28,7 @@ if ($result === true) {
     header("Location: ../pages/myRides.php");
     exit();
 } else {
-    header("Location: ../pages/myRides.php?error=" . urlencode($result));
+    header("Location: ../pages/myRides.php?error=" . urlencode($result)); //Mandamos el error
     exit();
 }
 

@@ -7,12 +7,12 @@ include($parentDir . '/actions/email.php');
 
 
 
-if ($argc < 2) {  // argc porque hay 2 cosas: "script.php" y "30", Cantidad de argumentos que yo pso este incluye el nombre del archivo 
+if ($argc < 2) {  
     echo "Uso: php script.php <minutos>\n";
     exit(1);
 }
 
-$minutos = intval($argv[1]);   //array con los valores de esos argumentos
+$minutos = intval($argv[1]);   
 
 $dataBase = new ConnectionBD();
 $conn = $dataBase->getConnection();
@@ -20,6 +20,7 @@ $conn = $dataBase->getConnection();
 $email = new Email();
 
 
+/*Obtiene información de los bookings que hayan pasado más de un cierto tiempo en minutos desde que fueron realizadas.*/ 
 $query = "SELECT uD.name AS driver_name, uD.lastName AS driver_lastName, uD.gmail AS driver_email,
     r.origin, r.destination, r.rideDate, r.departureTime,
     b.dateTime AS booking_time,
@@ -38,6 +39,10 @@ if (!$result) {
     exit(1);
 }
 
+
+/*Se declara un array que contendrá a los conductores que vienen de la cosnulta sql,
+en este array se almacenará/agruparán todas las reservas que tiene pendienten un chofer
+*/
 $drivers = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
@@ -63,7 +68,9 @@ while ($row = mysqli_fetch_assoc($result)) {
     }
 }
 
-
+/*Objetivo: Recorrer drivers y crear tarjetas de los bookings pendientes con elementos HTML y enviar el correo al conductor.
+Extra: Si el array de drivers tiene elementos, se recorre, se obtienen los datos, luego se hace otro recorrido, en este caso los bookings
+agrupados, para obtener la información de booking está pendiente y enviarla al conductor.*/ 
 if (count($drivers) > 0) {
     foreach ($drivers as $driver) {
         $driverName  = $driver['name'];

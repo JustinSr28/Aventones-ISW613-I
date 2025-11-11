@@ -61,7 +61,7 @@ Class Vehicles{
 	}
 
 
-	
+	//Obtenemos el Vehiculo mediante la Id.
 
 	public function getVehicleById($idVehicle){
 		$sql = "SELECT * FROM vehicles where idVehicle = $idVehicle";
@@ -83,7 +83,7 @@ Class Vehicles{
                     picture = '$picturePath',
 					status = '$status'
                 WHERE idVehicle = $idVehicle AND idUser = $idUser";
-    } else {
+    } else {			//Si no trae imagen, o sea es null, simplemente no se actualiza y se conserva la ruta de la imagen anterior
         $sql = "UPDATE vehicles 
                 SET plateNumber = '$plateNumber',
                     color = '$color',
@@ -102,7 +102,7 @@ Class Vehicles{
     }
 }
 
-
+	//Actualiza el estado del Vehiculo
 	public function desactivateVehicle($idVehicle, $idUser) {
 		
 	$sql = "UPDATE vehicles SET status = 'inactive' WHERE idVehicle = $idVehicle AND idUser = $idUser";  

@@ -16,7 +16,8 @@ $fee = $_POST['fee'];
 $plate = $_POST['plate'];
 $status = 'active';
 
-$days = isset($_POST['days']) ? implode(",", $_POST['days']) : "";
+$days = isset($_POST['days']) ? implode(",", $_POST['days']) : "";  //Si existen valores en Days, entonces hacemos ternario. Si hay, hacemos implode
+                                                                   //  (separar y unir) por coma los dias, sino, entonces será vacio
 
 session_start();
 $idUser = $_SESSION['idUser'];

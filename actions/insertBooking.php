@@ -6,7 +6,6 @@ require_once "../common/Rides.php";
 session_start();
 
 if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
-    echo "DEBUG: No hay sesión activa. Redirigiendo...";
     header("Location: ../pages/login.php");
     exit();
 }
@@ -20,6 +19,8 @@ if (isset($_POST['idRide'])) {
 } elseif (isset($_GET['idRide'])) {
     $idRide = $_GET['idRide'];
 }
+
+/*Se guardan los bookings, se recibe como parametro el id de ride que fue reservado y el usuario quien realizó la reservación */
 
 $rides = new Rides();
 $bookings = new Bookings();

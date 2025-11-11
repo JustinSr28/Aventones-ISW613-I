@@ -9,7 +9,7 @@
     $role   = $_SESSION['role']; 
     $idVehicle = $_GET['id']; 
     $vehicleObj = new Vehicles();
-    $vehicle = $vehicleObj->getVehicleById($idVehicle);
+    $vehicle = $vehicleObj->getVehicleById($idVehicle); //Carga Vehiculo mediante ID
 ?>
 <!DOCTYPE html>
 <html lang="en">

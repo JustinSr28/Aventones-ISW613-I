@@ -65,7 +65,7 @@
                 <?php
                 require_once "../common/Users.php";
                 $usuario = new Users();
-                $users = $usuario->loadUsers();
+                $users = $usuario->loadUsers(); //Funcion que carga todos los usuarios de la BD
                 ?>
                 <?php foreach ($users as $user): ?>
                 <tr>

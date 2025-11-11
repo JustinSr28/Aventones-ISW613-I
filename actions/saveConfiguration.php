@@ -5,7 +5,6 @@ require_once "../common/Users.php";
 session_start();
 
 if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
-    echo "DEBUG: No hay sesión activa. Redirigiendo...";
     header("Location: ../pages/login.php");
     exit();
 }
@@ -20,6 +19,8 @@ $publicBio =  $_POST['public-bio'];
 
 
 $token = bin2hex(random_bytes(16));
+
+/*Se verifica si el usuario ya tiene una configuración previa, sí es así se actualiza la conf, en caso contrario se inserta */
 
 $result = $user->getConfigurationData($idUser);
 

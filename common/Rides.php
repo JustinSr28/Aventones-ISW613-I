@@ -20,6 +20,8 @@ class Rides {
             return "Error: " . $sql . "<br>" . $this->conexion->error;
         }
 	}
+
+	//actualiza ride
 	
 	public function UpdateRide($idRide, $idUser, $origin, $destination, $departureTime, $days, $costPerSeat, $availableSeats, $status, $idVehicle){
 		$sql = "UPDATE rides 
@@ -39,6 +41,8 @@ class Rides {
 		}
 	}
 
+	//cambia estado del ride
+
 	public function desactivateRide($idRide, $idUser){
 		$sql = "UPDATE rides 
 				SET status = 'inactive'
@@ -50,7 +54,7 @@ class Rides {
 		}
 	}
 
-
+	//Encontrar idVehicle por placa
 
 	function foundIdVehicleByPlate($plate){
 		$sql = "SELECT idVehicle FROM vehicles WHERE plateNumber = '$plate'";
@@ -72,6 +76,8 @@ class Rides {
 			return "Error: " . $sql . "<br>" . $this->conexion->error;
 		}
 	}
+
+	//Actualiza el estado del ride, tanto a activo como desactivar
 
 	function updateStatusRide($idRide, $status){
 	$sql = "UPDATE rides SET status = '$status' WHERE idRide = $idRide";  
@@ -96,6 +102,7 @@ class Rides {
 		return $rides;
 	}
 
+		//Obtiene el ride, mediante la id
 	public function getRideById($idRide) {
 		$sql = "SELECT r.*, v.plateNumber, v.brand 
 				FROM rides r
@@ -111,7 +118,8 @@ class Rides {
 	}
 
 
-
+	/* Ejecutar una consulta SQL y devolver los resultados como un array asociativo.
+	Reutilizable dentro de la clase para obtener viajes sin repetir la lógica de ejecución de consultas.*/
 	private function fetchRides($sql) {
     	$rides = [];
     	$result = mysqli_query($this->conexion, $sql);
@@ -124,15 +132,22 @@ class Rides {
     	return $rides;
 	}
 
+	/*Obtiene los datos de la columna de puntos de origen, luego serán cargadas en un select */
 	public function getOrigin(){
 		$sql = "SELECT DISTINCT r.origin FROM rides r;";
 		return $this->fetchRides($sql);
 	}
 
+	/*Obtiene los datos de la columna de puntos de destino, luego serán cargadas en un select */
 	public function getDestination(){
 		$sql = "SELECT DISTINCT r.destination FROM rides r;";
 		return $this->fetchRides($sql);
 	}
+
+	/*Propósito:Filtrar viajes de la base de datos según origen, destino, días y orden deseado, devolviendo solo aquellos viajes activos y con asientos disponibles.
+	Extra: Es un filtro con una consulta sql dinámica, que dependiendo que parámetros vengan con datos se le va añadiendo a la consulta, 
+	en caso de que origen,destino y días vengas vacíos se devolverá un array vacío
+	*/
 
 	public function filter($origin = "",$destination="",$days= [], $orderBy = "departureTime", $order = "ASC"){
 		
@@ -187,6 +202,7 @@ class Rides {
 
 	}
 
+	/*Carga los datos necesarios para la pantalla de ride details*/
 	public function loadRideDetails($idRide){
 		$sql = "SELECT r.origin,r.destination,r.rideDate,r.departureTime,r.availableSeats,r.costPerSeat,v.plateNumber,v.brand,r.idRide,u.picture, u.name
 		FROM rides r 
@@ -196,6 +212,7 @@ class Rides {
 		return  mysqli_query($this->conexion, $sql);
 	}
 
+	/*Actualiza la cantidad de asientos del carro cuando se solicita un booking, se resta -1 por bookings*/
 	public function updateAvailableSeats($idRide){
 		$sql = "UPDATE rides SET availableSeats = availableSeats -1 WHERE idRide = $idRide";  
 		mysqli_query($this->conexion, $sql);

@@ -7,7 +7,7 @@
             header("Location: login.php");
             exit();
         }
-        $role   = $_SESSION['role']; 
+        $role   = $_SESSION['role'];  
         $idRide = $_GET['id'];
         $rideObj = new Rides();
         $vehicleObj = new Vehicles();
