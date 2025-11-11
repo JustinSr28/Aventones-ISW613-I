@@ -188,7 +188,7 @@ class Rides {
 	}
 
 	public function loadRideDetails($idRide){
-		$sql = "SELECT r.origin,r.destination,r.rideDate,r.departureTime,r.availableSeats,r.costPerSeat,v.plateNumber,v.brand,r.idRide,u.picture
+		$sql = "SELECT r.origin,r.destination,r.rideDate,r.departureTime,r.availableSeats,r.costPerSeat,v.plateNumber,v.brand,r.idRide,u.picture, u.name
 		FROM rides r 
 		JOIN users u ON r.idUser = u.idUser 
 		JOIN vehicles v ON r.idVehicle = v.idVehicle 
