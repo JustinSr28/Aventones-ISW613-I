@@ -141,8 +141,6 @@
         <nav aria-label="Footer navigation">
             <a href="editProfile.php" class="foot">Profile</a> |
             <a href="configuration.php" class="foot">Settings</a> |
-            <a href="login.php" class="foot">Login</a> |
-            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

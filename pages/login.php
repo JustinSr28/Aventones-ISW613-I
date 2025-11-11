@@ -44,7 +44,7 @@
                 </p>
 
 
-                <p>Not a user? <a href="../pages/userRegistration.html">Register Now</a></p>
+                <p>Not a user? <a href="../pages/userRegistration.php">Register Now</a></p>
 
                 <div class="contButton">
                     <button type="submit" class="button">Login</button>
@@ -60,8 +60,6 @@
         <nav aria-label="Footer navigation">
             <a href="editProfile.php" class="foot">Profile</a> |
             <a href="configuration.php" class="foot">Settings</a> |
-            <a href="login.php" class="foot">Login</a> |
-            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

@@ -117,12 +117,8 @@
     <footer>
         <hr>
         <nav aria-label="Footer navigation">
-            <a href="" class="foot">Home</a> |
-            <a href="" class="foot">Rides</a> |
-            <a href="" class="foot">Bookings</a> |
-            <a href="" class="foot">Settings</a> |
-            <a href="" class="foot">Login</a> |
-            <a href="" class="foot">Register</a>
+            <a href="editProfile.php" class="foot">Profile</a> |
+            <a href="configuration.php" class="foot">Settings</a> 
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 

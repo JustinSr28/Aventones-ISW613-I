@@ -3,7 +3,6 @@ require_once "../common/Users.php";
 
 session_start();
 if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
-    echo "DEBUG: No hay sesión activa. Redirigiendo...";
     header("Location: ../pages/login.php");
     exit();
 }
@@ -11,7 +10,6 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['role'])) {
 $users = new Users();
 
 $idUser = $_SESSION['idUser'];
-
 
 $picturePath = null;
 if (!empty($_FILES['picture']['name'])) { 
@@ -34,7 +32,5 @@ $users -> updateUser(
 
     header("Location: ../pages/editProfile.php");
     exit();
-
-
 
 ?>

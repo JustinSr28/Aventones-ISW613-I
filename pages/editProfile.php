@@ -70,6 +70,7 @@ $user= mysqli_fetch_assoc($userResult);
 
     <main>
         <h1>Edit Profile</h1>
+
         <form action="../actions/updateUser.php" method="post" class="formRider" enctype="multipart/form-data">
             <div>
                 <label for="first-name">First Name <br></label>
@@ -151,8 +152,6 @@ $user= mysqli_fetch_assoc($userResult);
         <nav aria-label="Footer navigation">
             <a href="editProfile.php" class="foot">Profile</a> |
             <a href="configuration.php" class="foot">Settings</a> |
-            <a href="login.php" class="foot">Login</a> |
-            <a href="userRegistration.html" class="foot">Register</a>
         </nav>
         <p>&copy; 2025 Aventones.com</p>
 
