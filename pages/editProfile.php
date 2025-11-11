@@ -74,17 +74,17 @@ $user= mysqli_fetch_assoc($userResult);
         <form action="../actions/updateUser.php" method="post" class="formRider" enctype="multipart/form-data">
             <div>
                 <label for="first-name">First Name <br></label>
-                <input type="text" id="first-name" name="first-name" value = "<?= $user['name'] ?>">
+                <input type="text" id="first-name" name="first-name" value = "<?= $user['name'] ?>" required>
             </div>
 
             <div>
                 <label for="last-name">Last Name<br></label>
-                <input type="text" id="last-name" name="last-name" value = "<?= $user['lastName']?>">
+                <input type="text" id="last-name" name="last-name" value = "<?= $user['lastName']?>" required>
             </div>
 
             <div>
                 <label for="id-card">ID<br></label>
-                <input type="text" id="id-card" name="id-card" value = "<?= $user['ID']?>">
+                <input type="text" id="id-card" name="id-card" value = "<?= $user['ID']?>" required>
             </div>
 
              <div>
@@ -94,27 +94,27 @@ $user= mysqli_fetch_assoc($userResult);
 
             <div class="bigElement">
                 <label for="email">Email<br></label>
-                <input type="text" id="email" name="email" value = "<?= $user['gmail']?>">
+                <input type="text" id="email" name="email" value = "<?= $user['gmail']?>" required>
             </div>
 
             <div>
                 <label for="password">Password<br></label>
-                <input type="password" id="password" name="password" >
+                <input type="password" id="password" name="password" required>
             </div>
 
             <div>
                 <label for="repeat-password">Repeat Password<br></label>
-                <input type="password" id="repeat-password" name="repeat-password" >
+                <input type="password" id="repeat-password" name="repeat-password" required>
             </div>
 
             <div class="bigElement">
                 <label for="address">Address<br></label>
-                <input type="text" id="address" name="address" value = "<?= $user['address']?>">
+                <input type="text" id="address" name="address" value = "<?= $user['address']?>" required>
             </div>
 
             <div>
                 <label for="phone-number">Phone Number<br></label>
-                <input type="tel" id="phone-number" name="phone-number" value = "<?= $user['phoneNumber']?>">
+                <input type="tel" id="phone-number" name="phone-number" value = "<?= $user['phoneNumber']?>" required>
             </div>
 
             <div>

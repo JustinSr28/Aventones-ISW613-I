@@ -58,17 +58,17 @@
         <form action="../actions/insertAdmin.php" method="post" class="formRider">
             <div>
                 <label for="first-name">First Name <br></label>
-                <input type="text" id="first-name" name="first-name">
+                <input type="text" id="first-name" name="first-name" required>
             </div>
 
             <div>
                 <label for="last-name">Last Name<br></label>
-                <input type="text" id="last-name" name="last-name">
+                <input type="text" id="last-name" name="last-name" required>
             </div>
 
             <div>
                 <label for="id-card">ID<br></label>
-                <input type="text" id="id-card" name="id-card">
+                <input type="text" id="id-card" name="id-card" required>
             </div>
 
             <div>
@@ -78,27 +78,27 @@
 
             <div class="bigElement">
                 <label for="email">Email<br></label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email" required>
             </div>
 
             <div>
                 <label for="password">Password<br></label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" required>
             </div>
 
             <div>
                 <label for="repeat-password">Repeat Password<br></label>
-                <input type="password" id="repeat-password" name="repeat-password">
+                <input type="password" id="repeat-password" name="repeat-password" required>
             </div>
 
             <div class="bigElement">
                 <label for="address">Address<br></label>
-                <input type="text" id="address" name="address">
+                <input type="text" id="address" name="address" required>
             </div>
 
             <div>
                 <label for="phone-number">Phone Number<br></label>
-                <input type="tel" id="phone-number" name="phone-number">
+                <input type="tel" id="phone-number" name="phone-number" required>
             </div>
 
             <div>
